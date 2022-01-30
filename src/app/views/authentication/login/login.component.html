@@ -1,5 +1,28 @@
-<app-header flexLayout="column"></app-header>
-<main flexLayout="row" fxFlex >
-    login works!
-</main>
-<app-footer flexLayout="column"></app-footer>
+<div id="login" class="container-fluid d-flex justify-content-center rounded">
+    <div class="row p-5">
+        <div class="col-12 w-100">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+            </div>
+        </div>
+        <div class="col-12 w-100">
+            <div class="mb-3">
+                <label for="inputPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password">
+              </div>
+        </div>
+        <div class=" d-flex justify-content-end">
+            <button (click)="login()" type="submit" class="btn btn-primary mb-3">Entrar</button>
+          </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-success mb-3">
+                <a style="color: white;" routerLink="cadastrar">Cadastre-se</a>    
+            </button>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a  routerLink="esqueceu-senha" style="font-size: medium; color: rgb(231, 68, 68);"
+             class="nav-link active" aria-current="page" href="#">Esqueceu sennha?</a>
+        </div>
+    </div>
+</div>

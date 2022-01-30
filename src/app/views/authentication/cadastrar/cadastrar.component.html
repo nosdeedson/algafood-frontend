@@ -1,0 +1,82 @@
+<div id="cadastrar" class="container-fluid d-flex justify-content-center rounded" >
+    <div class="row p-3">
+        <form #formUser="ngForm">
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    <span *ngIf="nome.errors && (nome.dirty || nome.touched)"
+                     class="mb-5 text-danger ml-3" [hidden]="!nome.errors.required">
+                     Digite o nome.
+                    </span>
+                    <span *ngIf="nome.errors && (nome.dirty || nome.touched)" 
+                    class="material-icons text-danger ml-3">
+                        error
+                   </span>
+                    <input #nome="ngModel" [(ngModel)]="user.nome" type="text" class="form-control" name="name" id="name"
+                        placeholder="Nome" required>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <span *ngIf="email.errors && (email.dirty || email.touched)"
+                     class="mb-5 text-danger ml-3" [hidden]="!email.errors.required">
+                        Digite o email.
+                    </span>
+                    <span *ngIf="email.errors && (email.dirty || email.touched)"
+                     class="material-icons text-danger ml-3" [hidden]="!email.errors.required">
+                        error
+                    </span>
+                    <input #email="ngModel" [(ngModel)]="user.email" type="email" class="form-control" name="email"
+                    id="email" placeholder="name@example.com" required>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha</label>
+                    <span *ngIf="senha.errors && (senha.dirty || senha.touched)"
+                     class="mb-5 text-danger ml-3" [hidden]="!senha.errors.required">
+                        Digite a senha.
+                    </span>
+                    <span *ngIf="senha.errors && (senha.dirty || senha.touched)"
+                     class="material-icons text-danger ml-3" [hidden]="!senha.errors.required">
+                        error
+                    </span>
+                    <input #senha="ngModel" [(ngModel)]="user.senha" type="password" class="form-control"
+                     name="senha" id="senha" required>
+                  </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="confirmeSenha" class="form-label">Confirme Senha</label>
+                    <span *ngIf="confirmeSenha.errors && (confirmeSenha.dirty || confirmeSenha.touched)"
+                        class="mb-5 text-danger ml-3" [hidden]="!confirmeSenha.errors.required">
+                        Repita a senha.
+                    </span>
+                    <span *ngIf="confirmeSenha.errors && (confirmeSenha.dirty || confirmeSenha.touched)"
+                     class="material-icons text-danger ml-3" [hidden]="!confirmeSenha.errors.required">
+                        error
+                    </span>
+                    <input #confirmeSenha="ngModel" [(ngModel)]="user.confirmeSenha" type="password" class="form-control"
+                        id="confirmeSenha" name="confirmeSenha" required>
+                </div>
+                <span *ngIf="senhaDiferente" class="mb-5 text-danger ml-3" [hidden]="!senhaDiferente">
+                    Senhas não conferem!! 
+                </span>
+                <span *ngIf="senhaDiferente"
+                class="material-icons text-danger ml-3" [hidden]="!email.errors.required">
+                   error
+               </span>
+            </div>
+        </form>
+        
+        <div class=" d-flex justify-content-end">
+            <button (click)="salvar()" type="submit" class="btn btn-primary mb-3">Cadastre-se</button>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <a routerLink="/" style="font-size: medium;" class="nav-link active" 
+            aria-current="page" href="#">Voltar ao Login</a>
+        </div>
+    </div>
+</div>

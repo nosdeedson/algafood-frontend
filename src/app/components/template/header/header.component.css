@@ -1,8 +1,19 @@
 header{
-    background-color: blue;
+    background-color: #1B98E0;
 }
 .logoSize{
-    width: 20%;
-    height: 20%;
+    width: 80px;
+    height: 80px;
     padding: 10px;
+}
+
+.avatar{
+    width: 60px;
+    height: 60px;
+    padding: 8px;
+}
+
+span{
+    position: relative;
+    top: 20%;
 }

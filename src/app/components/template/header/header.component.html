@@ -1,10 +1,31 @@
-<header >
-    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="gappx">
-        <div fxLayoutAlign="space-start center">
-            <img class="logoSize" src="assets/images/logoMedio.png" alt="logo">
-        </div>
-        <div fxLayoutAlign="space-start start">
-            <h1>Login</h1>
-        </div>
+<header class="bg-azul2 container-fluid" >
+    <div class="row">
+            <div class="col-2 ">
+                <img class="logoSize" src="assets/images/logoMedio.png" alt="logo">
+            </div>
+            <div class="col-3 d-flex justify-content-start" >
+                <i class="material-icons my-3 me-2">
+                    {{icon}}
+                </i>
+                <h1 class="my-3 ">{{title}}</h1>
+            </div>
+    
+            <div *ngIf="user != null" class="col-7 d-flex justify-content-end">
+                <div class="row">
+                    <span class="col-4 d-flex justify-content-center my-2"> {{user.nome}}</span>
+                    <img class="avatar col-4" src="assets/images/male-avatar.png" alt="">
+                    <div class="dropdown col-4 mt-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" 
+                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="#">
+                            <span class="material-icons">
+                                login
+                            </span>
+                          </a></li>
+                        </ul>
+                      </div>
+                </div>
+            </div>
     </div>
 </header>

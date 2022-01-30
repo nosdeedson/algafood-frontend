@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthenticationModule } from './views/authentication/authentication.module';
 import { TemplateModule } from './components/template/template.module';
+import { HttpClientModule } from '@angular/common/http';
+import { DefaultModule } from './views/default/default.module';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,11 @@ import { TemplateModule } from './components/template/template.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     FlexLayoutModule,
     TemplateModule,
     AuthenticationModule,
+    DefaultModule
   ],
   providers: [],
   bootstrap: [AppComponent]
