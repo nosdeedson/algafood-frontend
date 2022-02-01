@@ -25,3 +25,12 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## run the following comand to start this project
+## npm i @angular/flex-layout@12.0.0-beta.35
+
+## if not the project won't compile
+
+## install sweetAlert2 with the following command
+## npm install --save sweetalert2

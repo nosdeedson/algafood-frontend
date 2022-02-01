@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { HeaderService } from 'src/app/components/template/header/header.service';
 import { UserDTO } from 'src/app/model/user/user-model';
 
-import {} from '@fortawesome/angular-fontawesome'
 import { UserEndPointServiceService } from 'src/app/backend/user-end-point-service.service';
 import { Router } from '@angular/router';
 
@@ -15,7 +14,6 @@ import { Router } from '@angular/router';
 export class CadastrarComponent implements OnInit {
 
   senhaDiferente: boolean = false;
-
   constructor(private headerService : HeaderService,
     private userEndPoint: UserEndPointServiceService,
     private router : Router) {
@@ -31,29 +29,32 @@ export class CadastrarComponent implements OnInit {
      nome : '',
      email: '',
      senha: '',
-     confirmeSenha: ''
+     confirmeSenha : ''
    }
+
+   userSalvar : UserDTO = null;
 
   ngOnInit(): void {
     
   }
 
-  salvar(){
-    if( this.user.confirmeSenha !== this.user.senha){
+  async salvar() {
+    if (this.user.confirmeSenha !== this.user.senha) {
       this.senhaDiferente = true;
       return;
     }
 
-    this.userEndPoint.salvar(this.user)
-        .toPromise()
-        .then( resp => console.log(resp))
-        .catch(e => console.log(e));
-    
-    this.router.navigate(['/'])
+    this.userSalvar = {
+      nome: this.user.nome,
+      email: this.user.email,
+      senha: this.user.senha
+    }
 
-    this.userEndPoint.getEndPoints()
-        .toPromise()
-        .then(e => console.log(e))
+   await this.userEndPoint.salvar(this.userSalvar)
+      .toPromise()
+      .then(resp => console.log(resp))
+      .catch(e => console.log(e))
+      .finally(() => this.router.navigate(['/']));
   }
 
 }
