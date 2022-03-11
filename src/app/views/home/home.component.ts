@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserEndPointService } from 'src/app/backend/user-end-point-service.service';
 import { HeaderService } from 'src/app/components/template/header/header.service';
 
 @Component({
@@ -8,7 +9,10 @@ import { HeaderService } from 'src/app/components/template/header/header.service
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private headerService: HeaderService) {
+  links : string = '';
+
+  constructor(private headerService: HeaderService,
+    private userEndPointService: UserEndPointService) {
     this.headerService.headerData={
       title: 'Home',
       icon: 'home'
@@ -16,6 +20,11 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.userEndPointService.getEndPoints()
+      .toPromise()
+      .then(resp =>{
+        this.links = JSON.stringify(resp)
+      })
   }
 
 }

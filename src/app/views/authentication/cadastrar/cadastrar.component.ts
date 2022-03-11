@@ -3,8 +3,9 @@ import { NgForm } from '@angular/forms';
 import { HeaderService } from 'src/app/components/template/header/header.service';
 import { UserDTO } from 'src/app/model/user/user-model';
 
-import { UserEndPointServiceService } from 'src/app/backend/user-end-point-service.service';
+import { UserEndPointService } from 'src/app/backend/user-end-point-service.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cadastrar',
@@ -15,7 +16,7 @@ export class CadastrarComponent implements OnInit {
 
   senhaDiferente: boolean = false;
   constructor(private headerService : HeaderService,
-    private userEndPoint: UserEndPointServiceService,
+    private userEndPoint: UserEndPointService,
     private router : Router) {
     this.headerService.headerData = {
       title: 'Cadastrar',
@@ -52,9 +53,26 @@ export class CadastrarComponent implements OnInit {
 
    await this.userEndPoint.salvar(this.userSalvar)
       .toPromise()
-      .then(resp => console.log(resp))
-      .catch(e => console.log(e))
-      .finally(() => this.router.navigate(['/']));
+      .then(resp => {
+        console.log(resp)
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Usuário ' + resp.email + ' salvo com sucesso',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        this.router.navigate(['/']);
+      })
+      .catch(e => {
+        console.log(e)
+        Swal.fire({
+          title: 'Error!',
+          text: 'Falha ao salvar o usuário',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
+      });
   }
 
 }
