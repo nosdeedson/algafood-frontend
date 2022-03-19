@@ -1,19 +1,20 @@
 <section class="text-center" >
     <ul class="nav flex-column ">
         <li class="nav-item">
-          <a class="nav-link text-light active" aria-current="page" href="#">Meu perfil</a>
+          <a (click)="navegarTo('meu-perfil')" class="nav-link text-light active" 
+          aria-current="page" >Meu perfil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Pedidos</a>
+          <a (click)="navegarTo('pedidos')" class="nav-link text-light" >Pedidos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Fazer um pedido</a>
+          <a (click)="navegarTo('permissoes')" class="nav-link text-light" >Permissões</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light">Cadastrar endereço</a>
+          <a (click)="navegarTo('enderecos')" class="nav-link text-light">Endereços</a>
         </li>
         <li class="nav-item">
-          <a (click)="navegarTo('listar-usuarios')" href="#" class="nav-link text-light">Listar usuários</a>
+          <a (click)="navegarTo('listar-usuarios')"  class="nav-link text-light">Listar usuários</a>
         </li>
       </ul>
 </section>

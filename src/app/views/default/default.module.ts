@@ -6,6 +6,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from '../home/home.component';
 import { TemplateModule } from 'src/app/components/template/template.module';
 import { ListarUsuariosComponent } from '../listar-usuarios/listar-usuarios.component';
+import { MeuPerfilComponent } from '../meu-perfil/meu-perfil.component';
+import { PedidosComponent } from '../pedidos/pedidos.component';
 
 
 
@@ -13,7 +15,9 @@ import { ListarUsuariosComponent } from '../listar-usuarios/listar-usuarios.comp
   declarations: [
     DefaultComponent,
     HomeComponent,
-    ListarUsuariosComponent
+    ListarUsuariosComponent,
+    MeuPerfilComponent,
+    PedidosComponent
   ],
   imports: [
     CommonModule,

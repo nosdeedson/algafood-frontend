@@ -9,7 +9,8 @@ import { AuthenticationModule } from './views/authentication/authentication.modu
 import { TemplateModule } from './components/template/template.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DefaultModule } from './views/default/default.module';
-import { ListarUsuariosComponent } from './views/listar-usuarios/listar-usuarios.component';
+import { PermissoesComponent } from './views/permissoes/permissoes.component';
+import { EnderecosComponent } from './views/enderecos/enderecos.component';
 
 @NgModule({
   declarations: [
