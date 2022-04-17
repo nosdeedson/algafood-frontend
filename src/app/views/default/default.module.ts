@@ -8,7 +8,14 @@ import { TemplateModule } from 'src/app/components/template/template.module';
 import { ListarUsuariosComponent } from '../listar-usuarios/listar-usuarios.component';
 import { MeuPerfilComponent } from '../meu-perfil/meu-perfil.component';
 import { PedidosComponent } from '../pedidos/pedidos.component';
-
+import { PermissoesComponent } from '../permissoes/permissoes.component';
+import {MatTableModule} from '@angular/material/table'
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import { CriarEditarUsuarioComponent } from 'src/app/components/criar-editar-usuario/criar-editar-usuario.component';
+import { FormsModule } from '@angular/forms';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ListarCidadesComponent } from '../listar-cidades/listar-cidades.component';
 
 
 @NgModule({
@@ -17,13 +24,21 @@ import { PedidosComponent } from '../pedidos/pedidos.component';
     HomeComponent,
     ListarUsuariosComponent,
     MeuPerfilComponent,
-    PedidosComponent
+    PedidosComponent,
+    PermissoesComponent,
+    CriarEditarUsuarioComponent,
+    ListarCidadesComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     FlexLayoutModule,
-    TemplateModule
+    TemplateModule,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    FormsModule,
+    MatProgressSpinnerModule
   ]
 })
 export class DefaultModule { }

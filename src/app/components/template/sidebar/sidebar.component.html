@@ -1,20 +1,29 @@
 <section class="text-center" >
     <ul class="nav flex-column ">
-        <li class="nav-item">
-          <a (click)="navegarTo('meu-perfil')" class="nav-link text-light active" 
-          aria-current="page" >Meu perfil</a>
+        <li class="m-3">
+          <a href="meu-perfil" routerLink="meu-perfil" class="linkNav p-2" role="button" aria-current="page">Meu
+            perfil
+          </a>
         </li>
-        <li class="nav-item">
-          <a (click)="navegarTo('pedidos')" class="nav-link text-light" >Pedidos</a>
+        <li class="m-3">
+          <a href="pedidos" routerLink="pedidos" 
+          class="linkNav p-2" role="button">Pedidos</a>
         </li>
-        <li class="nav-item">
-          <a (click)="navegarTo('permissoes')" class="nav-link text-light" >Permissões</a>
+        <li class="m-3">
+          <a routerLink="permissoes" href="permissoes" 
+          class="linkNav p-2" role="button">Permissões</a>
         </li>
-        <li class="nav-item">
-          <a (click)="navegarTo('enderecos')" class="nav-link text-light">Endereços</a>
+        <li class="m-3">
+          <a routerLink="enderecos" href="enderecos" 
+          class="linkNav p-2" role="button">Endereços</a>
         </li>
-        <li class="nav-item">
-          <a (click)="navegarTo('listar-usuarios')"  class="nav-link text-light">Listar usuários</a>
+        <li class="m-3">
+          <a routerLink="listar-usuarios" href="listar-usuarios"  
+          class="linkNav p-2" role="button">Listar usuários</a>
+        </li>
+        <li class="m-3">
+          <a routerLink="listar-cidades" href="listar-cidades"
+           class="linkNav p-2" role="button">Listar Cidades</a>
         </li>
       </ul>
 </section>

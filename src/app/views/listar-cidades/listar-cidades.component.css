@@ -1,0 +1,7 @@
+section{
+    display: flex;;
+    flex-direction: column;
+    height: 100%;
+    margin: 2%;
+    background-color: rgba(80, 78, 78, 0.048);
+}

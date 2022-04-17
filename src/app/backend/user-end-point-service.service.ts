@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { UserDTO } from '../model/user/user-model';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+
+const options = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    Authorization: 'Bearer ' + environment.token
+  })
+};
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +19,15 @@ export class UserEndPointService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) { }
 
+  deletar(id: number): Observable<any>{
+    return this.http.delete<any>(`${this.baseUrl}/usuarios/${id}`, options)
+  }
+
+  editar(user: UserDTO, id: number) : Observable<any>{
+    return this.http.put<any>(`${this.baseUrl}/usuarios/${id}`, user, options)
+  }
+
   listar() : Observable<any> {
-    var headers = new Headers();
-    var options  = {}
-    headers.set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJub3NkZWpzMzJAZ21haWwuY29tIiwiaXNzIjoiRWRzb24gSm9zZSBkZSBTb3V6YSIsImlkIjoxLCJleHAiOjE2NDY3OTE5MjV9.1v2H8cvWG1NvuBQ_LAsuuhDMVANjFONzB5rzJIiAgxpWQzcHoxesg9s-gwT0bkcJLJnUDhrejJLJhu-QoPukfA');
-    options = {headers}
-    
     return this.http.get<any>(`${this.baseUrl}/usuarios`,  options);
   }
 

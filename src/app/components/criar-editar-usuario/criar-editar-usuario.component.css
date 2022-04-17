@@ -1,0 +1,14 @@
+section{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(80, 78, 78, 0.048);
+    height: 100%;
+    margin: 2%;
+}
+
+#cadastrar{
+    background: -webkit-linear-gradient(to right, #267871, #136a8a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #267871, #136a8a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    width: 80%;
+    margin-top: 2%;
+}

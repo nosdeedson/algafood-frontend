@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://ejs-algafood.herokuapp.com'
+  baseUrl: 'https://ejs-algafood.herokuapp.com',
+  token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlbWFyaWF6dW1pcmEram9zZUdFUkBnbWFpbC5jb20iLCJpc3MiOiJKb3NlIFNvdXphIiwiaWQiOjEsImV4cCI6MTY1MDIxOTY3MX0.jsbYmMomr8IqAb56WSEqUnaEnGpChr2nUkuh1IqBaWqbDFBdcmi_Cj42kuGmojofqKNdBtsKBRZ6qAZ12J55pQ'
 };
 
 /*

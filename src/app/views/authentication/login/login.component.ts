@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginServiceService } from 'src/app/backend/login-service.service';
 import { HeaderService } from 'src/app/components/template/header/header.service';
 import { UserDTO } from 'src/app/model/user/user-model';
-
+import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,12 +13,15 @@ import { UserDTO } from 'src/app/model/user/user-model';
 export class LoginComponent implements OnInit {
 
   user: UserDTO = {
-    email : 'teste@email',
-    senha : '123'
+    email : '',
+    senha : ''
   }
 
+  usuario : any;
+
   constructor( private headerService: HeaderService,
-    private router : Router) {
+    private router : Router,
+    private loginEndpoint: LoginServiceService) {
     headerService.headerData = {
       title: 'Login',
       icon: 'login'
@@ -27,12 +32,22 @@ export class LoginComponent implements OnInit {
 
   }
 
-  login() : void{
-    if( this.user.email === 'teste@email' && this.user.senha === '123' ){
-      this.router.navigate(['home'])
-    }else{
-      alert('usuario e senha invalido')
-    }
+  login(){
+    this.loginEndpoint.login(this.user)
+      .toPromise()
+      .then(resp => {
+        this.usuario = resp;
+        environment.token = this.usuario.token;
+        this.router.navigateByUrl('/home')
+      })
+      .catch(e => {
+        Swal.fire({
+          icon: 'error',
+          title: 'error!',
+          showLoaderOnConfirm: true,
+          timer: 4000
+        })
+      })
   }
 
 }

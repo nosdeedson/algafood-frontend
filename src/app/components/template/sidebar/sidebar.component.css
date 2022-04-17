@@ -5,3 +5,15 @@ section{
     background-color: rgb(44, 43, 43);
     color: whitesmoke;
 }
+
+.linkNav{
+    color: white;
+    border: solid white .5px;
+    border-radius: 15%;
+    text-decoration: none;
+}
+
+.linkNav:hover{
+    background-color: rgb(255, 0, 0);
+}
+

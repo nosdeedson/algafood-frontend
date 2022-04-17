@@ -1,5 +1,8 @@
+import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserEndPointService } from 'src/app/backend/user-end-point-service.service';
+import { UserDTO } from 'src/app/model/user/user-model';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -7,26 +10,66 @@ import Swal from 'sweetalert2';
   templateUrl: './listar-usuarios.component.html',
   styleUrls: ['./listar-usuarios.component.css']
 })
+
+
 export class ListarUsuariosComponent implements OnInit {
 
-  usuarios : any;
+  displayedColumns: string[] = [ 'Id', 'Nome', 'Email', 'Ações'];
+  dataSource: any[];
+  usuarios: any[];
+  user: UserDTO;
+  listaDeUsuarios : boolean = false;
 
-  constructor( private userEndPoint: UserEndPointService) { }
+  constructor( private userEndPoint: UserEndPointService ,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.listaDeUsuarios = false;
     this.userEndPoint.listar()
       .toPromise()
       .then(resp =>{
-        this.usuarios = resp;
+        this.dataSource = resp._embedded.usuários;
+        this.listaDeUsuarios = true;
       })
       .catch(error =>{
-        console.log(error)
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: error.error.detail
         })
+        this.listaDeUsuarios = true
       })
+  }
+
+  editar(user: UserDTO){
+    this.router.navigateByUrl('editar-usuario', {
+      state: { user: user}
+    })
+  }
+
+  async deletar(user: UserDTO){
+    await this.userEndPoint.deletar(user.id)
+      .toPromise()
+      .then( () =>{
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuário deletado com sucesso.',
+          timer: 3000
+        })
+      })
+      .catch(e =>{
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: e,
+          showConfirmButton: true,
+          timer: 4000
+        })
+      })
+  }
+
+  criarUsuario(){
+    this.router.navigateByUrl('adicionar-usuario')
   }
 
 }

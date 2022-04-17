@@ -50,7 +50,7 @@
             "styles": [
               "src/custom-theme.scss",
               "src/styles.css",
-              "node_modules/sweetalert2/src/variables.scss",
+              "node_modules/sweetalert2/src/sweetalert2.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
