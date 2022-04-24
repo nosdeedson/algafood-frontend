@@ -28,7 +28,6 @@ export class CriarEditarUsuarioComponent implements OnInit {
   userId: any;
   constructor(private userEndPoint: UserEndPointService,
     private router: Router,) {
-      console.log(this.router.getCurrentNavigation().extras.state)
       if( this.router.getCurrentNavigation().extras.state !== undefined ){
         this.user = this.router.getCurrentNavigation().extras.state.user;
         this.edicao= true;

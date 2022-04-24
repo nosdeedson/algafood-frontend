@@ -9,8 +9,7 @@ import { AuthenticationModule } from './views/authentication/authentication.modu
 import { TemplateModule } from './components/template/template.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DefaultModule } from './views/default/default.module';
-import { CriarEditarUsuarioComponent } from './components/criar-editar-usuario/criar-editar-usuario.component';
-import { ListarCidadesComponent } from './views/listar-cidades/listar-cidades.component';
+import { CriarEditarCozinhaComponent } from './components/criar-editar-cozinha/criar-editar-cozinha.component';
 
 @NgModule({
   declarations: [

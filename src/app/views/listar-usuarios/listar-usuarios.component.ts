@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export class ListarUsuariosComponent implements OnInit {
 
   displayedColumns: string[] = [ 'Id', 'Nome', 'Email', 'Ações'];
-  dataSource: any[];
+  dataSource: any[] = [];
   usuarios: any[];
   user: UserDTO;
   listaDeUsuarios : boolean = false;
@@ -37,7 +37,7 @@ export class ListarUsuariosComponent implements OnInit {
           title: 'Oops...',
           text: error.error.detail
         })
-        this.listaDeUsuarios = true
+        this.listaDeUsuarios = false
       })
   }
 

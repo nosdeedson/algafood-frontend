@@ -1,19 +1,7 @@
 section{
-    display: flex;;
+    display: flex;
     flex-direction: column;
     height: 100%;
     margin: 2%;
     background-color: rgba(80, 78, 78, 0.048);
-}
-
-.edit > i {
-    color: #d9cd26;
-}
-
-.delete > i {
-    color: red;
-}
-
-a {
-    cursor: pointer;
 }

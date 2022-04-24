@@ -1,0 +1,21 @@
+<section>
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="row p-3">
+            <div class="col-12">
+                <h1 class="mb-3">Cadastrar Cozinha</h1>
+                <form #formCozinha="ngForm" class="example-form">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Cozinha</mat-label>
+                        <input [(ngModel)]="cozinha.nome" matInput placeholder="Ex. Mineira" value="{{cozinha.nome}}">
+                    </mat-form-field>
+                </form>
+                <div class="d-flex justify-content-end m-2">
+                    <button (click)="salvar()" class="btn btn-primary mb-3">Salvar</button>
+                </div>
+                <!-- <div *ngIf="edicao" class="d-flex justify-content-end m-3">
+            <button (click)="editar()" class="btn btn-primary mb-3">Editar</button>
+        </div> -->
+            </div>
+        </div>
+    </div>
+</section>

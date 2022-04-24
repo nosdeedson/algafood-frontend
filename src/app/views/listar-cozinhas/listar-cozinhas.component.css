@@ -1,0 +1,20 @@
+section{
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+    background-color: rgba(80, 78, 78, 0.048);
+    height: 93%;
+}
+
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }

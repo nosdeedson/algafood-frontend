@@ -34,17 +34,31 @@
       </table>
 
     </div>
-    <div *ngIf="dataSource.length === 0">
-      Sem Informações
-    </div>
-    <div *ngIf="!listaDeUsuarios">
-      <mat-spinner></mat-spinner>
-    </div>
-      <div class="demo-button-container d-flex justify-content-end">
-        <button mat-raised-button (click)="criarUsuario()" class="demo-button">
-          Adicionar
-        </button>
+    <div class="row " *ngIf="dataSource.length == 0 && !listaDeUsuarios">
+
+      <div class="col-8 d-flex justify-content-center" *ngIf="dataSource.length == 0 && !listaDeUsuarios">
+          <div class="m-4 ">
+              <h1 class="h1">Sem Informação.<i class="material-icons">perm_device_information</i> </h1>
+          </div>
       </div>
+      <div class="col-4">
+
+          <div class="demo-button-container my-3 d-flex justify-content-end" style="margin-right: 2%;">
+              <button (click)="criarUsuario()" mat-raised-button class="demo-button">
+                  Adicionar
+              </button>
+          </div>
+      </div>
+      
+  </div>
+
+  <div class="row" *ngIf="dataSource.length > 0">
+      <div class="col-12">
+          <div class="demo-button-containder my-3 mx-3 d-flex justify-content-end">
+              <button (click)="criarUsuario()" class="demo-button" mat-raised-button>Adicionar</button>
+          </div>
+      </div>
+  </div>
 </section>
 
 
