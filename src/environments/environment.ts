@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   baseUrl: 'https://ejs-algafood.herokuapp.com',
-  token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlbWFyaWF6dW1pcmEram9zZUdFUkBnbWFpbC5jb20iLCJpc3MiOiJKb3NlIFNvdXphIiwiaWQiOjEsImV4cCI6MTY1MDgxMjA3Mn0.GsZY4jRQJohUBP6TDwydrvJrwGxkbKPBxj6mLo-qU-R32YMPBqiZI-7Nah257iCgbUIdtRSRRPMgRT6tLzOadw'
+  // baseUrl : 'http://localhost:8080',
+  token: ''
 };
 
 /*

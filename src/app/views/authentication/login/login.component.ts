@@ -41,6 +41,23 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home')
       })
       .catch(e => {
+        console.log(e)
+        Swal.fire({
+          icon: 'error',
+          title: 'error!',
+          text: e.error.message,
+          showLoaderOnConfirm: true,
+          timer: 4000
+        })
+      })
+  }
+
+  testeRoot(){
+    this.loginEndpoint.testeRoot()
+      .toPromise().then(resp =>{
+        console.log(resp)
+      })
+      .catch( error =>{
         Swal.fire({
           icon: 'error',
           title: 'error!',
