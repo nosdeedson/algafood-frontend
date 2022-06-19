@@ -7,9 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthenticationModule } from './views/authentication/authentication.module';
 import { TemplateModule } from './components/template/template.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DefaultModule } from './views/default/default.module';
-import { CriarEditarCozinhaComponent } from './components/criar-editar-cozinha/criar-editar-cozinha.component';
+import { RequestInterceptor } from './request.interceptor';
+import { WaitingReponseComponent } from './components/waiting-reponse/waiting-reponse.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { CriarEditarCozinhaComponent } from './components/criar-editar-cozinha/c
     AuthenticationModule,
     DefaultModule
   ],
-  providers: [],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

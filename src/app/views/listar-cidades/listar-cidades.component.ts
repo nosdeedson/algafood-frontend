@@ -44,7 +44,7 @@ export class ListarCidadesComponent implements OnInit {
   }
 
   adicionarCidade(){
-    this.adicionar = true
+    this.router.navigateByUrl('editar-cidade')
   }
 
   editar(cidade: CidadeDTO){

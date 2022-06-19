@@ -5,6 +5,18 @@ html{
     height: 100%;
 }
 
+.edit > i {
+    color: #d9cd26;
+}
+
+.delete > i {
+    color: red;
+}
+
+a {
+    cursor: pointer;
+}
+
 /* .bg-azul1{
     background-color: #E8F1F2;
 }

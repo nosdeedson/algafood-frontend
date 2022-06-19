@@ -26,6 +26,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSortModule } from '@angular/material/sort';
 import { ListarCozinhasComponent } from '../listar-cozinhas/listar-cozinhas.component';
 import { CriarEditarCozinhaComponent } from 'src/app/components/criar-editar-cozinha/criar-editar-cozinha.component';
+import { WaitingReponseComponent } from 'src/app/components/waiting-reponse/waiting-reponse.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import { CriarEditarCozinhaComponent } from 'src/app/components/criar-editar-coz
     ListarEstadosComponent,
     CriarEditarEstadoComponent,
     ListarCozinhasComponent,
-    CriarEditarCozinhaComponent
+    CriarEditarCozinhaComponent,
+    WaitingReponseComponent
   ],
   imports: [
     CommonModule,
@@ -53,6 +57,7 @@ import { CriarEditarCozinhaComponent } from 'src/app/components/criar-editar-coz
     MatIconModule,
     FormsModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatSelectModule,
     MatInputModule,
     ReactiveFormsModule,

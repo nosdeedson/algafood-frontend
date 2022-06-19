@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginServiceService } from 'src/app/backend/login-service.service';
 import { HeaderService } from 'src/app/components/template/header/header.service';
+import { User } from 'src/app/model/user/user';
 import { UserDTO } from 'src/app/model/user/user-model';
-import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
@@ -17,7 +17,10 @@ export class LoginComponent implements OnInit {
     senha : ''
   }
 
-  usuario : any;
+  usuario : User = {
+    Authorities : [],
+    token : ''
+  };
 
   constructor( private headerService: HeaderService,
     private router : Router,
@@ -36,8 +39,10 @@ export class LoginComponent implements OnInit {
     this.loginEndpoint.login(this.user)
       .toPromise()
       .then(resp => {
-        this.usuario = resp;
-        environment.token = this.usuario.token;
+        this.usuario.Authorities = resp.Authorities;
+        this.usuario.token = resp.token
+        sessionStorage.setItem('user', JSON.stringify(this.usuario))
+        this.usuario = JSON.parse(sessionStorage.getItem('user'))
         this.router.navigateByUrl('/home')
       })
       .catch(e => {
@@ -46,21 +51,6 @@ export class LoginComponent implements OnInit {
           icon: 'error',
           title: 'error!',
           text: e.error.message,
-          showLoaderOnConfirm: true,
-          timer: 4000
-        })
-      })
-  }
-
-  testeRoot(){
-    this.loginEndpoint.testeRoot()
-      .toPromise().then(resp =>{
-        console.log(resp)
-      })
-      .catch( error =>{
-        Swal.fire({
-          icon: 'error',
-          title: 'error!',
           showLoaderOnConfirm: true,
           timer: 4000
         })

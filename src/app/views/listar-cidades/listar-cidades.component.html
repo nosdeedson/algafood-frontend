@@ -1,5 +1,5 @@
 <section>
-    
+    <app-waiting-reponse [waitingResponse]="waitingRequest" *ngIf="!listaDeCidade"></app-waiting-reponse>
     <table *ngIf="!adicionar && dataSource.length > 0" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     
         <!--- Note that these columns can be defined in any order.
@@ -26,27 +26,11 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    
-    <div *ngIf="waitingRequest">
-        <mat-spinner></mat-spinner>
-    </div>
-    <div class="row" *ngIf="!adicionar">
-        <div class="col-8">
-            <div *ngIf="dataSource.length === 0" class="m-4 d-flex justify-content-center">
-                <h1 class="h1">Sem Informação. <i class="material-icons">perm_device_information</i></h1>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="demo-button-container d-flex justify-content-end m-3">
-                <button (click)="adicionarCidade()" mat-raised-button class="demo-button">
-                    Adicionar
-                </button>
-            </div>
+    <div class="col-12">
+        <div class="demo-button-container d-flex justify-content-end m-3">
+            <button (click)="adicionarCidade()" mat-raised-button class="demo-button">
+                Adicionar
+            </button>
         </div>
     </div>
-
-    <div class="row" *ngIf="adicionar">
-        <app-criar-editar-cidade></app-criar-editar-cidade>
-    </div>
-
 </section>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationGuardGuard } from './authentication-guard.guard';
 import { CriarEditarCidadeComponent } from './components/criar-editar-cidade/criar-editar-cidade.component';
 import { CriarEditarCozinhaComponent } from './components/criar-editar-cozinha/criar-editar-cozinha.component';
 import { CriarEditarEstadoComponent } from './components/criar-editar-estado/criar-editar-estado.component';
@@ -17,7 +18,6 @@ import { ListarEstadosComponent } from './views/listar-estados/listar-estados.co
 import { ListarUsuariosComponent } from './views/listar-usuarios/listar-usuarios.component';
 import { MeuPerfilComponent } from './views/meu-perfil/meu-perfil.component';
 import { PedidosComponent } from './views/pedidos/pedidos.component';
-import { AdicionarComponent } from './views/permissoes/adicionar/adicionar/adicionar.component';
 import { PermissoesComponent } from './views/permissoes/permissoes.component';
 
 const routes: Routes = [
@@ -41,6 +41,7 @@ const routes: Routes = [
   {
     path: '',
     component:DefaultComponent,
+    canActivate: [AuthenticationGuardGuard],
     children:[
       {
         path: 'home',

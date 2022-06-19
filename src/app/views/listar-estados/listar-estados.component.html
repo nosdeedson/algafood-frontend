@@ -1,4 +1,5 @@
 <section>
+    <app-waiting-reponse [waitingResponse]="waitingResponse" *ngIf="waitingResponse"></app-waiting-reponse>
     <table *ngIf="dataSource.length > 0" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.
@@ -25,26 +26,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-    <div *ngIf="waitingResponse">
-        <mat-spinner></mat-spinner>
-    </div>
-    <div class="row " *ngIf="dataSource.length == 0 && !waitingResponse">
-
-        <div class="col-8 d-flex justify-content-center" *ngIf="dataSource.length == 0 && !waitingResponse">
-            <div class="m-4 ">
-                <h1 class="h1">Sem Informação.<i class="material-icons">perm_device_information</i> </h1>
-            </div>
-        </div>
-        <div class="col-4">
-
-            <div class="demo-button-container my-3 d-flex justify-content-end" style="margin-right: 2%;">
-                <button (click)="adicionarEstado()" mat-raised-button class="demo-button">
-                    Adicionar
-                </button>
-            </div>
-        </div>
-        
-    </div>
 
     <div class="row" *ngIf="dataSource.length > 0">
         <div class="col-12">

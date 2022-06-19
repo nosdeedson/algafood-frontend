@@ -6,7 +6,8 @@
                 <form #formCozinha="ngForm" class="example-form">
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Cozinha</mat-label>
-                        <input [(ngModel)]="cozinha.nome" matInput placeholder="Ex. Mineira" value="{{cozinha.nome}}">
+                        <input matInput value="{{cozinha.nome}}" 
+                        placeholder="Ex. Mineira" [(ngModel)]="cozinha.nome" [ngModelOptions]="{standalone: true}">
                     </mat-form-field>
                 </form>
                 <div class="d-flex justify-content-end m-2">

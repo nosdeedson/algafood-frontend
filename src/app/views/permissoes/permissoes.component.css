@@ -2,6 +2,6 @@ section{
     display: flex;
     flex-direction: column;
     background-color: rgba(80, 78, 78, 0.048);
-    height: 100%;
+    height: 95%;
     margin: 2%;
 }

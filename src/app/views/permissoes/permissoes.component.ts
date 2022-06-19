@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class PermissoesComponent implements OnInit {
 
+  waitingResponse: boolean = true;
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {

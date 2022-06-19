@@ -131,13 +131,12 @@ export class CriarEditarCidadeComponent implements OnInit {
     this.cidadeEndpoint.salvar(this.cidadeSalvar)
         .toPromise()
         .then(resp =>{
-          console.log(resp)
           Swal.fire({
             title: 'Sucesso!',
             icon: 'success',
             timer: 3000
           })
-          window.location.reload()
+          this.router.navigateByUrl('/listar-cidades')
         })
         .catch(error =>{
           console.log(error)
