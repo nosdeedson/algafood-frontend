@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class WaitingReponseComponent implements OnInit {
 
   @Input() waitingResponse: boolean
+  @Input() temDados: boolean
   constructor() { }
 
   ngOnInit(): void {

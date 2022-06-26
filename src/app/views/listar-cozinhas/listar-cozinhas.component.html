@@ -1,6 +1,15 @@
 <section>
     <app-waiting-reponse [waitingResponse]="waitingResponse" *ngIf="!temDados"></app-waiting-reponse>
+ 
     <div [hidden]="!temDados" >
+      <div class="row ">
+        <div class="col-12 justify-content-center " style="text-align: center;">
+          <h1 class="h1">Cozinhas</h1>
+        </div>
+        <div class="col-12 justify-content-center">
+          <hr class="col-12">
+        </div>
+      </div>
       <mat-form-field appearance="standard">
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>

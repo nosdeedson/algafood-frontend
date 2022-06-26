@@ -10,7 +10,6 @@ import { TemplateModule } from './components/template/template.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DefaultModule } from './views/default/default.module';
 import { RequestInterceptor } from './request.interceptor';
-import { WaitingReponseComponent } from './components/waiting-reponse/waiting-reponse.component';
 
 @NgModule({
   declarations: [

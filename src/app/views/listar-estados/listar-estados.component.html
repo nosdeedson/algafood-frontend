@@ -1,5 +1,10 @@
 <section>
     <app-waiting-reponse [waitingResponse]="waitingResponse" *ngIf="waitingResponse"></app-waiting-reponse>
+    <div class="row ">
+        <div class="col-12 " style="text-align: center;">
+          <h1 class="h1 m-2">Estados</h1>
+        </div>
+      </div>
     <table *ngIf="dataSource.length > 0" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.

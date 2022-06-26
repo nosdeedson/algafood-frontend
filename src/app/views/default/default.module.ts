@@ -28,7 +28,7 @@ import { ListarCozinhasComponent } from '../listar-cozinhas/listar-cozinhas.comp
 import { CriarEditarCozinhaComponent } from 'src/app/components/criar-editar-cozinha/criar-editar-cozinha.component';
 import { WaitingReponseComponent } from 'src/app/components/waiting-reponse/waiting-reponse.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-
+import { AssociarUserPermitionGroupComponent } from 'src/app/components/associar-user-permition-group/associar-user-permition-group.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     CriarEditarEstadoComponent,
     ListarCozinhasComponent,
     CriarEditarCozinhaComponent,
-    WaitingReponseComponent
+    WaitingReponseComponent,
+    AssociarUserPermitionGroupComponent
   ],
   imports: [
     CommonModule,
@@ -64,6 +65,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatPaginatorModule,
     MatFormFieldModule,
     MatSortModule,
+    
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationGuardGuard } from './authentication-guard.guard';
+import { AssociarUserPermitionGroupComponent } from './components/associar-user-permition-group/associar-user-permition-group.component';
 import { CriarEditarCidadeComponent } from './components/criar-editar-cidade/criar-editar-cidade.component';
 import { CriarEditarCozinhaComponent } from './components/criar-editar-cozinha/criar-editar-cozinha.component';
 import { CriarEditarEstadoComponent } from './components/criar-editar-estado/criar-editar-estado.component';
@@ -62,6 +63,10 @@ const routes: Routes = [
       {
         path: 'permissoes',
         component: PermissoesComponent
+      },
+      {
+        path: 'associar-usuario-perimissao-grupo',
+        component: AssociarUserPermitionGroupComponent
       },
       {
         path: 'enderecos',

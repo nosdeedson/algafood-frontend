@@ -7,13 +7,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  pageSelecionada: string = ''
 
-  constructor(private router : Router) { }
+  constructor(private router : Router) { 
+   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { 
+    this.pageSelecionada = this.router.routerState.snapshot.url;
+   }
 
-  navegarTo(to : string) : void{
-    this.router.navigate([to])
-  }
 }

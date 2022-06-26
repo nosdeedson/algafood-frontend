@@ -1,53 +1,36 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { GrupoPermissoesEndpointService } from 'src/app/backend/grupo-permissoes-endpoint.service';
 import { UsuarioGrupoEndpointService } from 'src/app/backend/usuario-grupo-endpoint.service';
 import { SwalService } from 'src/app/helper/swal/swal.service';
 import { GrupoModel } from 'src/app/model/grupo/grupo-model';
 
 @Component({
-  selector: 'app-permissoes',
-  templateUrl: './permissoes.component.html',
-  styleUrls: ['./permissoes.component.css']
+  selector: 'app-associar-user-permition-group',
+  templateUrl: './associar-user-permition-group.component.html',
+  styleUrls: ['./associar-user-permition-group.component.css']
 })
-export class PermissoesComponent implements OnInit, AfterViewInit{
-
-  // firstTable
-  displayedColumns: string[] = ['id', 'grupo', 'userGrupoActions', 'usuarios', 'grupoPermissoesActions', 'permissoes', 'permissoesActions'];
+export class AssociarUserPermitionGroupComponent implements OnInit {
+  
+  displayedColumns: string[] = ['id', 'grupo', 'userGrupoActions', 'usuarios', ];
   @ViewChild(MatPaginator) paginator : MatPaginator;
   @ViewChild(MatSort) sort : MatSort;
-  permissoesForm = new FormControl();
-  usuariosForm = new FormControl();
   waitingResponse: boolean = true;
   temDados: boolean = false;
   grupos: GrupoModel[] = [];
   dataSource: MatTableDataSource<GrupoModel>;
   usuarioSelecionado : number = 0;
   permissaoSelecionada: number = 0;
-
-  constructor(private router: Router,
-    private grupoPermissaoEndpontService : GrupoPermissoesEndpointService,
-    private usuarioGrupoEndpointService: UsuarioGrupoEndpointService,
-    private swal: SwalService) {
-      this.dataSource = new MatTableDataSource(this.grupos);
-    }
-
-  ngAfterViewInit(): void {
+  constructor(private swal: SwalService,
+    private grupoPermissaoEndpontService: GrupoPermissoesEndpointService,
+    private usuarioGrupoEndpointService: UsuarioGrupoEndpointService) { 
+    this.dataSource = new MatTableDataSource(this.grupos);
   }
 
   ngOnInit(): void {
-   this.carregarGrupoPermissaoUsuarioAssociados();
-  }
-
-  associarUserPermitionGroup(){
-    this.router.navigateByUrl('associar-usuario-perimissao-grupo')
-  }
-
-  carregarGrupoPermissaoUsuarioAssociados(){
     this.grupoPermissaoEndpontService.listar()
    .toPromise()
    .then(resp =>{
@@ -93,6 +76,7 @@ export class PermissoesComponent implements OnInit, AfterViewInit{
        }
        this.dataSource.data.push(grupoResp)
      });
+     console.log(this.dataSource.data)
      this.dataSource.paginator = this.paginator
      this.dataSource.sort = this.sort
      this.waitingResponse = false;
@@ -101,62 +85,15 @@ export class PermissoesComponent implements OnInit, AfterViewInit{
    .catch(erro =>{
      this.swal.erroCarregarPagina(erro)
    })
+  
   }
-
-  deletar(grupo){
-    alert(grupo)
-  }
-
-  desassociarGrupoPermissao(grupoId: number){
-    if(this.permissaoSelecionada === 0){
-      this.swal.objetoNaoSelecionado('Nenhuma permissão selecionada, selecione por favor.');
-    }else{
-      this.grupoPermissaoEndpontService.desassociarGrupoPermissao(grupoId, this.permissaoSelecionada)
-        .toPromise()
-        .then(resp =>{
-          this.swal.sucessoSemRetorno('Permissão desassociada do Grupo.')
-          this.permissaoSelecionada = 0;
-          this.carregarGrupoPermissaoUsuarioAssociados();
-        })
-    }
-  }
-
-  desassociarGrupoUsuario(grupoId: number){
-    if(this.usuarioSelecionado === 0){
-      this.swal.objetoNaoSelecionado('Nenum usuário selecionado, por favor selecione.')
-    }else{
-      this.usuarioGrupoEndpointService.desassociarGrupoUsuario(this.usuarioSelecionado, grupoId)
-        .toPromise()
-        .then(() => {
-          this.swal.sucessoSemRetorno('Usuário desassociado do grupo.')
-          this.usuarioSelecionado = 0;
-          this.carregarGrupoPermissaoUsuarioAssociados()
-        })
-        .catch(erro =>{
-          console.log(erro)
-          this.swal.erroCarregarPagina(erro);
-        })
-    }
-  }
-
-  editarUserGrupo(idGrupo: number){
-    alert(this.usuarioSelecionado + " grupo " + idGrupo)
-  }
-
-  editarPermissaoGrupo(idGrupo : number){
-    alert(this.permissaoSelecionada + ' grupo ' + idGrupo)
-  }
-
+  
   selectPermissao(event: Event){
     this.permissaoSelecionada = Number((event.target as HTMLSelectElement).value)
   }
 
   selectUsuario(event: Event){
     this.usuarioSelecionado = Number((event.target as HTMLSelectElement).value)
-  }
-
-  navegarAdicionar() {
-    this.router.navigateByUrl("/adicionar-permissao")
   }
 
 }

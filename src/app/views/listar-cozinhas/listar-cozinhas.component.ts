@@ -14,11 +14,10 @@ import Swal from 'sweetalert2';
 })
 export class ListarCozinhasComponent implements OnInit {
 
-
   displayedColumns: string[] = ['id', 'nome', 'Actions' ];
   
-  @ViewChild(MatPaginator) paginator: MatPaginator ;
-  @ViewChild(MatSort) sort : MatSort ;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort : MatSort;
 
   dataSource: MatTableDataSource<CozinhaDTO>;
   cozinhas : CozinhaDTO[] = [];
