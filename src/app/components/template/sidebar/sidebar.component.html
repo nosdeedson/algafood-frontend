@@ -2,32 +2,32 @@
     <ul class="nav flex-column ">
         <li class="m-3">
           <a href="meu-perfil" routerLink="meu-perfil" class="linkNav p-2" 
-          [ngClass]="{'linkSelecionado' : pageSelecionada === '/meu-perfil' ? true :false}"
+          [ngClass]="{'linkSelecionado' : pageSelecionada === 'meu-perfil' ? true :false}"
           role="button" aria-current="page" id="meuPerfil"> Meu perfil </a>
         </li>
         <li class="m-3">
           <a href="pedidos" routerLink="pedidos" id="pedidos" class="linkNav p-2" 
-          [ngClass]="{'linkSelecionado' : pageSelecionada === '/pedidos' ? true : false}" role="button" >Pedidos</a>
+          [ngClass]="{'linkSelecionado' : pageSelecionada === 'pedidos' ? true : false}" role="button" >Pedidos</a>
         </li>
         <li class="m-3">
           <a routerLink="permissoes" href="permissoes" id="permissoes" class="linkNav p-2" 
-          [ngClass]="{'linkSelecionado' : pageSelecionada === '/permissoes' ? true : false}"  role="button">Permissões</a>
+          [ngClass]="{'linkSelecionado' : pageSelecionada === 'permissoes' ? true : false}"  role="button">Permissões</a>
         </li>
         <li class="m-3">
           <a routerLink="listar-estados" href="listar-estados" id="estados" class="linkNav p-2"
-          [ngClass]="{'linkSelecionado' : pageSelecionada === '/listar-estados' ? true : false}"  role="button"> Estados</a>
+          [ngClass]="{'linkSelecionado' : pageSelecionada === 'listar-estados' ? true : false}"  role="button"> Estados</a>
         </li>
         <li class="m-3">
           <a routerLink="listar-usuarios" href="listar-usuarios" id="usuarios" class="linkNav p-2" 
-          [ngClass]="{'linkSelecionado' : pageSelecionada === '/listar-usuarios' ? true : false}"  role="button" >Usuários</a>
+          [ngClass]="{'linkSelecionado' : pageSelecionada === 'listar-usuarios' ? true : false}"  role="button" >Usuários</a>
         </li>
         <li class="m-3">
           <a routerLink="listar-cidades" href="listar-cidades" id="cidades" class="linkNav p-2" 
-          [ngClass]="{'linkSelecionado' : pageSelecionada === '/listar-cidades' ? true : false}"  role="button"> Cidades</a>
+          [ngClass]="{'linkSelecionado' : pageSelecionada === 'listar-cidades' ? true : false}"  role="button"> Cidades</a>
         </li>
         <li class="m-3">
           <a class="linkNav p-2" routerLink="listar-cozinhas" href="listar-cozinhas"
-          [ngClass]="{'linkSelecionado' : pageSelecionada === '/listar-cozinhas' ? true : false}"  role="button" id="cozinhas" >Cozinhas</a>
+          [ngClass]="{'linkSelecionado' : pageSelecionada === 'listar-cozinhas' ? true : false}"  role="button" id="cozinhas" >Cozinhas</a>
         </li>
       </ul>
 </section>

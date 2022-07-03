@@ -3,10 +3,15 @@
         *ngIf="!temDados">
     </app-waiting-reponse>
 
-    <div class="row " *ngIf="temDados">
-        <div class="col-12 " style="text-align: center;">
-            <h1 class="h1 m-2">Associar/Grupo/Usuário/Permissão</h1>
+    <div class="container" *ngIf="temDados">
+      <div class="row align-items-center">
+        <div class="col text-center">
+          <h1 class="h1">Associar/Grupo/Usuário</h1>
         </div>
+        <div class="col text-center">
+          <h1 class="h1">Associar/Grupo/Permissão</h1>
+        </div>
+      </div>
     </div>
 
     <div class="mat-elevation-z8" [hidden]="!temDados">
@@ -23,12 +28,30 @@
                 <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
             </ng-container>
 
+            <!-- Usuarios Column -->
+            <ng-container matColumnDef="usuarios">
+             <th mat-header-cell *matHeaderCellDef> Usuários </th>
+             <td mat-cell *matCellDef="let element"> 
+ 
+               <mat-form-field *ngIf="element.usuarios.length > 0" appearance="fill" class="mt-2">
+                 <mat-label>Usuários</mat-label>
+                 <select  matNativeControl (change)="selectUsuario($event)">
+                   <option value="">Selecione</option>
+                   <option class="my-5" *ngFor="let usuario of element.usuarios" [value]="usuario.id"
+                           [selected]="selectUsuario === usuario.id">{{ usuario.nome }}
+                   </option>
+                 </select>
+               </mat-form-field>
+               
+             </td>
+           </ng-container>
+
             <!-- Actions grupo user  Column -->
             <ng-container matColumnDef="userGrupoActions">
-                <th mat-header-cell *matHeaderCellDef>Desassociar/Usuário </th>
+                <th mat-header-cell *matHeaderCellDef>Associar/Usuário </th>
                 <td mat-cell *matCellDef="let element">
-                    <a *ngIf="element.usuarios.length > 0" class=" ms-2" data-toggle="tooltip" data-placement="right"
-                        title="Desassociar Usuário do Grupo. Escolha usuário primeiro.">
+                    <a (click)="associarUsuario(element.id)" *ngIf="element.usuarios.length > 0" class=" ms-2" data-toggle="tooltip" data-placement="right"
+                        title="Associar Usuário do Grupo. Escolha usuário primeiro.">
                         <mat-icon>image</mat-icon>
                     </a>
 
@@ -41,27 +64,73 @@
                     </mat-label>
                 </td>
             </ng-container>
+            
+            <!-- Permissoes Column -->
+            <ng-container matColumnDef="permissoes" >
+              <th mat-header-cell *matHeaderCellDef> Permissões </th>
+              <td mat-cell *matCellDef="let element"  >
+  
+                <mat-form-field appearance="fill" class="mt-2" *ngIf="element.permissoes.length > 0">
+                  <mat-label>Permissões</mat-label>
+                  <select  matNativeControl (change)="selectPermissao($event)">
+                    <option value="">Selecione</option>
+                    <option  class="my-5" *ngFor="let permissao of element.permissoes" [value]="permissao.id"
+                            [selected]="selectPermissao === permissao.id">{{ permissao.nome }}
+                    </option>
+                  </select>
+                </mat-form-field>
 
+                <mat-label *ngIf="element.permissoes.length === 0" style="margin-left: 10px;">
+                    <i *ngIf="element.permissoes.length === 0"
+                      data-toggle="tooltip" data-placement="right" title="Grupo com todas as permissões">
+                      <mat-icon>hourglass</mat-icon> 
+                      Todas Permissões
+                    </i>
+                </mat-label>
+  
+              </td>
+            </ng-container>
 
+            <!-- Actions grupo user  Column -->
+            <ng-container matColumnDef="permissaoGrupoActions">
+                <th mat-header-cell *matHeaderCellDef>Associar/Permissão </th>
+                <td mat-cell *matCellDef="let element">
+                    <a (click)="associarPermissaoGrupo(element.id)" *ngIf="element.permissoes.length > 0" class=" ms-2" 
+                        data-toggle="tooltip" data-placement="right" title="Associar Permissão ao Grupo. Escolha Permissão primeiro.">
+                        <mat-icon>image</mat-icon>
+                    </a>
 
-           <!-- Usuarios Column -->
-           <ng-container matColumnDef="usuarios">
-            <th mat-header-cell *matHeaderCellDef> Usuários </th>
-            <td mat-cell *matCellDef="let element"> 
+                    <mat-label *ngIf="element.permissoes.length === 0" style="margin-left: 10px;">
+                        <i *ngIf="element.permissoes.length === 0" data-toggle="tooltip" data-placement="right"
+                            title="Todas as Permissões associadas ao Grupo">
+                            <mat-icon>hourglass</mat-icon>
+                            Todas Permissões
+                        </i>
+                    </mat-label>
+                </td>
+            </ng-container>         
+            
+            <!-- Actions permissão Column -->
+            <ng-container matColumnDef="permissoesActions" >
+              <th mat-header-cell *matHeaderCellDef>Permissão </th>
+              <td mat-cell *matCellDef="let element" >
+                <a *ngIf="element.permissoes.length > 0"  class="edit" (click)="openDialog()" 
+                  data-toggle="tooltip" data-placement="right" title="Editar permissão">
+                   <i class="material-icons">edit</i>
+                   
+                </a>
+                <a *ngIf="element.permissoes.length > 0"  class="delete ms-2" (click)="deletarPermissao()"
+                  data-toggle="tooltip" data-placement="right" title="Deletar permissão">
+                   <i class="material-icons" color="warn">delete</i>
+                </a>  
+                <a (click)="irPermissoes()" *ngIf="element.permissoes.length === 0"  class="edit"
+                    data-toggle="tooltip" data-placement="right" 
+                    title="Clique aqui em Permissões no menu lateral para editar as permissões deste grupo.">
+                    <mat-icon>last_page</mat-icon>
+                  </a>            
+               </td>
 
-              <mat-form-field *ngIf="element.usuarios.length > 0" appearance="fill" class="mt-2">
-                <mat-label>Usuários</mat-label>
-                <select  matNativeControl (change)="selectUsuario($event)">
-                  <option value="">Selecione</option>
-                  <option class="my-5" *ngFor="let usuario of element.usuarios" [value]="usuario.id"
-                          [selected]="selectUsuario === usuario.id">{{ usuario.nome }}
-                  </option>
-                </select>
-              </mat-form-field>
-              
-            </td>
-          </ng-container>
-
+            </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

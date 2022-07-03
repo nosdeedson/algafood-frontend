@@ -43,7 +43,6 @@ export class CriarEditarEstadoComponent implements OnInit {
     this.estadoEndpointService.editar(this.estadoEditar, this.estado.id)
         .toPromise()
         .then( resp =>{
-          console.log(resp)
           Swal.fire({
             icon: 'success',
             title: 'Sucesso',
@@ -66,7 +65,6 @@ export class CriarEditarEstadoComponent implements OnInit {
     this.estadoEndpointService.salvar(this.estado)
           .toPromise()
           .then(resp =>{
-            console.log(resp)
             Swal.fire({
               icon: 'success',
               title: 'Sucesso!',
@@ -76,7 +74,6 @@ export class CriarEditarEstadoComponent implements OnInit {
             this.router.navigateByUrl('listar-estados')
           })
           .catch(e =>{
-            console.log(e)
             Swal.fire({
               icon: 'error',
               title: 'Erro',

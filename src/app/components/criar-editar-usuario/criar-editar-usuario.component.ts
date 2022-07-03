@@ -85,7 +85,6 @@ export class CriarEditarUsuarioComponent implements OnInit {
         this.router.navigateByUrl('listar-usuarios')
       })
       .catch(e =>{
-        console.log(e)
         Swal.fire({
           title: 'Error!',
           text: e.error.detail,

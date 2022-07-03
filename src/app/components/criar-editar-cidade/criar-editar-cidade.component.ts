@@ -139,7 +139,6 @@ export class CriarEditarCidadeComponent implements OnInit {
           this.router.navigateByUrl('/listar-cidades')
         })
         .catch(error =>{
-          console.log(error)
           Swal.fire({
             title: 'Error!',
             icon: 'error',

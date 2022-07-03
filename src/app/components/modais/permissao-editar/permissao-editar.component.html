@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Editar Permissão</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Nome</mat-label>
+    <input matInput [(ngModel)]="permissao.nome" value="{{permissao.nome}}">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Descrição</mat-label>
+    <input matInput [(ngModel)]="permissao.descricao" value="{{permissao.descricao}}">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-success" mat-button [mat-dialog-close]="permissao.nome" cdkFocusInitial>Ok</button>
+  <button class="btn btn-danger" mat-button (click)="onNoClick()">Fechar</button>
+</div>
