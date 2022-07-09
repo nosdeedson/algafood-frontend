@@ -26,6 +26,10 @@ export class UserEndPointService {
     return this.http.get<any>(`${this.baseUrl}`,  this.options);
   }
 
+  listarUsuariosNãoVinculadosAoGrupo(grupoId : number) : Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/usuarios-sem-vinculo-grupo/${grupoId}`);
+  }
+
   salvar(user: UserDTO) : Observable<any> {
     return this.http.post<any>(`${this.baseUrl}`, user);
   }

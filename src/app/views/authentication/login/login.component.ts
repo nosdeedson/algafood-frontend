@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home')
       })
       .catch(e => {
-        console.log(e)
         Swal.fire({
           icon: 'error',
           title: 'error!',

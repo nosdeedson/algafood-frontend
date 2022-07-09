@@ -1,5 +1,5 @@
 export interface PermissaoModel {
-    id: number,
-    descricao: string,
-    nome: string
+    id?: number,
+    descricao?: string,
+    nome?: string
 }

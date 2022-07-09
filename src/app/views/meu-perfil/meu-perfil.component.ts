@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
 
 @Component({
   selector: 'app-meu-perfil',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MeuPerfilComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sidebarService: SiderbarService) {
+    this.sidebarService.sidebarData = { page : 'meu-perfil'}
+   }
 
   ngOnInit(): void {
   }

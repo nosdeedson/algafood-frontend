@@ -54,7 +54,6 @@ export class CadastrarComponent implements OnInit {
    await this.userEndPoint.salvar(this.userSalvar)
       .toPromise()
       .then(resp => {
-        console.log(resp)
         Swal.fire({
           position: 'top',
           icon: 'success',
@@ -65,7 +64,6 @@ export class CadastrarComponent implements OnInit {
         this.router.navigate(['/']);
       })
       .catch(e => {
-        console.log(e)
         Swal.fire({
           title: 'Error!',
           text: 'Falha ao salvar o usuário',

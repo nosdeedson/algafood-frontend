@@ -29,6 +29,10 @@ import { CriarEditarCozinhaComponent } from 'src/app/components/criar-editar-coz
 import { WaitingReponseComponent } from 'src/app/components/waiting-reponse/waiting-reponse.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { AssociarUserPermitionGroupComponent } from 'src/app/components/associar-user-permition-group/associar-user-permition-group.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { PermissaoEditarComponent } from 'src/app/components/modais/permissao-editar/permissao-editar.component';
+import { CriarGrupoComponent } from 'src/app/components/criar-grupo/criar-grupo.component';
+import { CriarPermissaoComponent } from 'src/app/components/criar-permissao/criar-permissao.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,10 @@ import { AssociarUserPermitionGroupComponent } from 'src/app/components/associar
     ListarCozinhasComponent,
     CriarEditarCozinhaComponent,
     WaitingReponseComponent,
-    AssociarUserPermitionGroupComponent
+    AssociarUserPermitionGroupComponent,
+    PermissaoEditarComponent,
+    CriarPermissaoComponent,
+    CriarGrupoComponent,
   ],
   imports: [
     CommonModule,
@@ -65,7 +72,7 @@ import { AssociarUserPermitionGroupComponent } from 'src/app/components/associar
     MatPaginatorModule,
     MatFormFieldModule,
     MatSortModule,
-    
+    MatDialogModule
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

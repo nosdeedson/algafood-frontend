@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { EstadoEndpointService } from 'src/app/backend/estado-endpoint.service';
+import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
 import { EstadoDTO } from 'src/app/model/estado/estado-model';
 import Swal from 'sweetalert2';
 
@@ -14,12 +15,15 @@ export class ListarEstadosComponent implements OnInit {
 
   constructor(
     private estadoEndpointService: EstadoEndpointService,
-    private router: Router
-    ) { }
+    private router: Router,
+    private sidebarService: SiderbarService) {
+      this.sidebarService.sidebarData = { page: 'listar-estados'}
+     }
 
   waitingResponse : boolean = true;
   dataSource : any[] = [];
   displayedColumns: string[] = ['Id', 'Nome', 'Ações']
+
   ngOnInit(): void {
     this.waitingResponse = true;
     this.estadoEndpointService.listar()
@@ -52,7 +56,6 @@ export class ListarEstadosComponent implements OnInit {
     this.estadoEndpointService.deletar(estado.id)
           .toPromise()
           .then(resp =>{
-            console.log(resp)
             Swal.fire({
               icon: 'success',
               title: 'Sucesso',

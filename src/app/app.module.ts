@@ -10,6 +10,9 @@ import { TemplateModule } from './components/template/template.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DefaultModule } from './views/default/default.module';
 import { RequestInterceptor } from './request.interceptor';
+import { PermissaoEditarComponent } from './components/modais/permissao-editar/permissao-editar.component';
+import { CriarPermissaoComponent } from './components/criar-permissao/criar-permissao.component';
+import { CriarGrupoComponent } from './components/criar-grupo/criar-grupo.component';
 
 @NgModule({
   declarations: [

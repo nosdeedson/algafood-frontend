@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { CidadeEndpointService } from 'src/app/backend/cidade-endpoint.service';
+import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
 import { CidadeDTO } from 'src/app/model/cidade/cidade-model';
 import Swal from 'sweetalert2';
 @Component({
@@ -18,7 +19,12 @@ export class ListarCidadesComponent implements OnInit {
   adicionar: boolean = false;
 
   constructor(private cidadeEndpoint: CidadeEndpointService,
-    private router: Router) { }
+    private router: Router, 
+    private sidebarService: SiderbarService) {
+      this.sidebarService.sidebarData ={
+        page: 'listar-cidades'
+      }
+     }
 
   ngOnInit(): void {
     this.adicionar = false;

@@ -13,6 +13,10 @@ export class GrupoPermissoesEndpointService {
 
   constructor(private http : HttpClient) { }
 
+  associarGrupoPermissao(grupoId: number, permissaoId: number) : Observable<any>{
+    return this.http.put(`${this.baseUrl}/${grupoId}/permissoes/${permissaoId}`, this.options);
+  }
+
   desassociarGrupoPermissao(grupoId: number, permissaoId: number) : Observable<any>{
     return this.http.delete(`${this.baseUrl}/${grupoId}/permissoes/${permissaoId}`);
   }
@@ -27,6 +31,10 @@ export class GrupoPermissoesEndpointService {
 
   listarUsuariosPorGrupoId(grupoId: number) : Observable<any>{
     return this.http.get(`${this.baseUrl}/usuarios-por-grupo/${grupoId}`)
+  }
+
+  listarPermissoesNaoVinculadaGrupo(grupoId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${grupoId}/permissoes/permissoes-sem-vinculo-grupo`);
   }
 
 }

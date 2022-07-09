@@ -2,6 +2,7 @@ import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserEndPointService } from 'src/app/backend/user-end-point-service.service';
+import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
 import { UserDTO } from 'src/app/model/user/user-model';
 import Swal from 'sweetalert2';
 
@@ -21,14 +22,17 @@ export class ListarUsuariosComponent implements OnInit {
   listaDeUsuarios : boolean = false;
   waitingResonse : boolean = true;
   constructor( private userEndPoint: UserEndPointService ,
-    private router: Router) { }
+    private router: Router,
+    private sidebarService: SiderbarService) {
+      this.sidebarService.sidebarData = { page: 'listar-usuarios'}
+     }
 
   ngOnInit(): void {
     this.listaDeUsuarios = false;
     this.userEndPoint.listar()
       .toPromise()
       .then(resp =>{
-        this.dataSource = resp._embedded.usuários;
+        this.dataSource = resp._embedded.usuarios;
         this.listaDeUsuarios = true;
         this.waitingResonse = false;
       })

@@ -6,6 +6,8 @@ import { CriarEditarCidadeComponent } from './components/criar-editar-cidade/cri
 import { CriarEditarCozinhaComponent } from './components/criar-editar-cozinha/criar-editar-cozinha.component';
 import { CriarEditarEstadoComponent } from './components/criar-editar-estado/criar-editar-estado.component';
 import { CriarEditarUsuarioComponent } from './components/criar-editar-usuario/criar-editar-usuario.component';
+import { CriarGrupoComponent } from './components/criar-grupo/criar-grupo.component';
+import { CriarPermissaoComponent } from './components/criar-permissao/criar-permissao.component';
 import { AuthenticationComponent } from './views/authentication/authentication.component';
 import { CadastrarComponent } from './views/authentication/cadastrar/cadastrar.component';
 import { EsqueceuSenhaComponent } from './views/authentication/esqueceu-senha/esqueceu-senha.component';
@@ -63,6 +65,14 @@ const routes: Routes = [
       {
         path: 'permissoes',
         component: PermissoesComponent
+      },
+      {
+        path: 'criar-permissao',
+        component: CriarPermissaoComponent
+      },
+      {
+        path: 'criar-grupo',
+        component: CriarGrupoComponent
       },
       {
         path: 'associar-usuario-perimissao-grupo',

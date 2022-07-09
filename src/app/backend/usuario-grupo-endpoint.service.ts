@@ -13,6 +13,10 @@ export class UsuarioGrupoEndpointService {
   options = environment.options
 
   constructor(private http: HttpClient) { }
+
+  associarGrupoUsuario(usuarioId: number, grupoId: number) : Observable<any> {
+    return this.http.put(`${this.baseUrl}/${usuarioId}/grupos/${grupoId}`, this.options)
+  }
   
   desassociarGrupoUsuario(usuarioId: number, grupoId: number,) : Observable<any>{
     return this.http.delete(`${this.baseUrl}/${usuarioId}/grupos/${grupoId}`)
