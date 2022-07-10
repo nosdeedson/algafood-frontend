@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import {  Route, Router } from '@angular/router';
+import { User } from 'src/app/model/user/user';
 import { UserDTO } from 'src/app/model/user/user-model';
+import { MeuPerfilComponent } from '../../modais/meu-perfil/meu-perfil.component';
 import { HeaderService } from './header.service';
 
 @Component({
@@ -9,15 +13,16 @@ import { HeaderService } from './header.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private headerService: HeaderService) { }
+  constructor(private headerService: HeaderService,
+    private router: Router,
+    private dialog: MatDialog) {  }
 
-  // user : UserDTO ={
-  //   nome : 'edson'
-  // }
-
-  user: UserDTO = null;
-
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    if ( this.router.routerState.snapshot.url !== '/' ){
+      this.headerService.user = JSON.parse(sessionStorage.getItem('user'));
+    }else{
+      this.headerService.user = null
+    }
   }
 
   get title(): string{
@@ -27,5 +32,39 @@ export class HeaderComponent implements OnInit {
   get icon() : string{
     return this.headerService.headerData.icon
   }
+
+  get usuarioNome() : string {
+    return this.headerService.user.nome
+  }
+
+  get genero(): string {
+    return this.headerService.user.genero
+  }
+
+  get user(): UserDTO {
+    return this.headerService.user
+  }
+
+  openDialog(): void {
+    alert('teste')
+    const dialogRef = this.dialog.open(MeuPerfilComponent, {
+      width: '250px',
+      data: '',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.acao();
+    });
+  }
+
+  acao(){
+    console.log('acoes')
+  }
+
+  sair(){
+    sessionStorage.removeItem('user');
+    this.router.navigateByUrl('/')
+  }
+
 
 }

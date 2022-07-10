@@ -10,9 +10,7 @@ import { TemplateModule } from './components/template/template.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DefaultModule } from './views/default/default.module';
 import { RequestInterceptor } from './request.interceptor';
-import { PermissaoEditarComponent } from './components/modais/permissao-editar/permissao-editar.component';
-import { CriarPermissaoComponent } from './components/criar-permissao/criar-permissao.component';
-import { CriarGrupoComponent } from './components/criar-grupo/criar-grupo.component';
+import { MeuPerfilComponent } from './components/modais/meu-perfil/meu-perfil.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +24,7 @@ import { CriarGrupoComponent } from './components/criar-grupo/criar-grupo.compon
     FlexLayoutModule,
     TemplateModule,
     AuthenticationModule,
-    DefaultModule
+    DefaultModule,
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
   bootstrap: [AppComponent]

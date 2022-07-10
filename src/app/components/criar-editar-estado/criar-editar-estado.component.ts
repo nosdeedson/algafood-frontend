@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EstadoEndpointService } from 'src/app/backend/estado-endpoint.service';
+import { SwalService } from 'src/app/helper/swal/swal.service';
 import { EstadoDTO } from 'src/app/model/estado/estado-model';
 import Swal from 'sweetalert2';
+import { HeaderService } from '../template/header/header.service';
 
 
 @Component({
@@ -17,8 +19,10 @@ export class CriarEditarEstadoComponent implements OnInit {
 
   constructor(
     private estadoEndpointService: EstadoEndpointService,
-    private router: Router
-    ) { 
+    private router: Router,
+    private swal: SwalService,
+    private headerService: HeaderService) {
+      this.headerService.headerData = {icon: 'location_city', title: 'Criar/Editar estado'} 
       if( this.router.getCurrentNavigation().extras.state !== undefined ){
         this.estado = this.router.getCurrentNavigation().extras.state.estado
         this.edicao = true;

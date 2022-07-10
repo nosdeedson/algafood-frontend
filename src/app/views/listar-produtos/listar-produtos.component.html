@@ -1,0 +1,17 @@
+<section>
+  <app-waiting-reponse [waitingResponse]="waitingResponse" [urlToGo]="'adicionar-produto'"
+      [temDados]="listaDeProdutos"></app-waiting-reponse>
+    <div class="row " *ngIf="listaDeProdutos">
+      <div class="col-12 " style="text-align: center;">
+        <h1 class="h1 m-2">Produtos</h1>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="listaDeProdutos">
+      <div class="col-12">
+          <div class="demo-button-containder my-3 mx-3 d-flex justify-content-end">
+              <button  class="demo-button" mat-raised-button>Adicionar</button>
+          </div>
+      </div>
+  </div>
+</section>

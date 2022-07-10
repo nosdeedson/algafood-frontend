@@ -3,5 +3,6 @@ export interface UserDTO{
     email? : string
     senha?: string
     confirmeSenha?: string,
-    id?: number
+    id?: number,
+    genero?: string
 }

@@ -4,6 +4,10 @@ import { HeaderComponent } from './header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MeuPerfilComponent } from '../modais/meu-perfil/meu-perfil.component';
 
 
 
@@ -11,11 +15,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    MeuPerfilComponent,
   ],
   imports: [
     CommonModule,
     FlexLayoutModule,
+    RouterModule,
+    MatIconModule,
+    MatDialogModule
   ],
   exports: [
     HeaderComponent,

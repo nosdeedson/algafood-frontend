@@ -17,3 +17,7 @@ span{
     position: relative;
     top: 20%;
 }
+
+.sair > i {
+    color: #0f0f0f;
+}

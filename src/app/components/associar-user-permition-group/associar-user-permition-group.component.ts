@@ -13,6 +13,7 @@ import { GrupoModel } from 'src/app/model/grupo/grupo-model';
 import { PermissaoModel } from 'src/app/model/grupo/permissao-model';
 import { UserDTO } from 'src/app/model/user/user-model';
 import { PermissaoEditarComponent } from '../modais/permissao-editar/permissao-editar.component';
+import { HeaderService } from '../template/header/header.service';
 import { SiderbarService } from '../template/sidebar/siderbar.service';
 
 @Component({
@@ -37,6 +38,7 @@ export class AssociarUserPermitionGroupComponent implements OnInit {
   permissaoAtualizar: PermissaoModel = {nome : '', descricao : ''}
 
   constructor(private sidebarService: SiderbarService,
+    private headerService: HeaderService,
     private swal: SwalService,
     private grupoPermissaoEndpontService: GrupoPermissoesEndpointService,
     private usuarioGrupoEndpointService: UsuarioGrupoEndpointService,
@@ -46,6 +48,7 @@ export class AssociarUserPermitionGroupComponent implements OnInit {
     private dialog: MatDialog) { 
       this.sidebarService.sidebarData = { page : 'associar-usuario-perimissao-grupo'}
       this.dataSource = new MatTableDataSource(this.grupos);
+      this.headerService.headerData = { icon: 'lock_open', title: 'Associar usuário à permissão'}
   }
 
   ngOnInit(): void {

@@ -4,7 +4,7 @@
             <div class="col-12 d-flex justify-content-center">
                 <mat-form-field appearance="outline">
                     <mat-label>Permissão</mat-label>
-                    <input matInput placeholder="Nome">
+                    <input matInput placeholder="Nome" [(ngModel)]="permissao.nome">
                     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                     <mat-hint>Nome para uma Permissão. Tipo EDITAR_COZINHAS.</mat-hint>
                 </mat-form-field>
@@ -15,7 +15,7 @@
             <div class="col-12 d-flex justify-content-center">
                 <mat-form-field appearance="outline">
                     <mat-label>Permissão</mat-label>
-                    <input matInput placeholder="Descrição">
+                    <input matInput placeholder="Descrição" [(ngModel)]="permissao.descricao">
                     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                     <mat-hint>Descrição para uma Permissão. Tipo: Editar cozinhas.</mat-hint>
                 </mat-form-field>
@@ -24,7 +24,7 @@
         <br> <br>
         <div class="row">
             <div class="col-8 d-flex justify-content-end">
-                <button mat-flat-button color="primary">Salvar</button>
+                <button (click)="salvar()" mat-flat-button color="primary">Salvar</button>
             </div>
         </div>
     </div>

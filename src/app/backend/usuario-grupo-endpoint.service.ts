@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment';
 })
 export class UsuarioGrupoEndpointService {
 
-  baseUrl = environment.baseUrl + '/usuarios'
-  options = environment.options
+  private baseUrl = environment.baseUrl + '/usuarios'
+  private options = environment.options
 
   constructor(private http: HttpClient) { }
 

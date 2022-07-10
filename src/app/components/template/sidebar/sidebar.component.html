@@ -1,17 +1,17 @@
 <section class="text-center" >
     <ul class="nav flex-column ">
         <li class="m-3">
-          <a href="meu-perfil" routerLink="meu-perfil" class="linkNav p-2" 
-          [ngClass]="{'linkSelecionado' : pageSelecionada === 'meu-perfil' ? true :false}"
-          role="button" aria-current="page" id="meuPerfil"> Meu perfil </a>
+          <a href="listar-produtos" routerLink="listar-produtos" class="linkNav p-2" 
+          [ngClass]="{'linkSelecionado' : pageSelecionada === 'listar-produtos' ? true :false}"
+          role="button" aria-current="page" id="meuPerfil"> Produtos </a>
         </li>
         <li class="m-3">
-          <a href="pedidos" routerLink="pedidos" id="pedidos" class="linkNav p-2" 
-          [ngClass]="{'linkSelecionado' : pageSelecionada === 'pedidos' ? true : false}" role="button" >Pedidos</a>
+          <a href="listar-pedidos" routerLink="listar-pedidos" id="pedidos" class="linkNav p-2" 
+          [ngClass]="{'linkSelecionado' : pageSelecionada === 'listar-pedidos' ? true : false}" role="button" >Pedidos</a>
         </li>
         <li class="m-3">
-          <a routerLink="permissoes" href="permissoes" id="permissoes" class="linkNav p-2" 
-          [ngClass]="{'linkSelecionado' : pageSelecionada === 'permissoes' ? true : false}"  role="button">Permissões</a>
+          <a routerLink="listar-permissoes" href="listar-permissoes" id="permissoes" class="linkNav p-2" 
+          [ngClass]="{'linkSelecionado' : pageSelecionada === 'listar-permissoes' ? true : false}"  role="button">Permissões</a>
         </li>
         <li class="m-3">
           <a routerLink="listar-estados" href="listar-estados" id="estados" class="linkNav p-2"

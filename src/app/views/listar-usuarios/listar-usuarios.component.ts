@@ -2,6 +2,7 @@ import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserEndPointService } from 'src/app/backend/user-end-point-service.service';
+import { HeaderService } from 'src/app/components/template/header/header.service';
 import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
 import { UserDTO } from 'src/app/model/user/user-model';
 import Swal from 'sweetalert2';
@@ -23,7 +24,9 @@ export class ListarUsuariosComponent implements OnInit {
   waitingResonse : boolean = true;
   constructor( private userEndPoint: UserEndPointService ,
     private router: Router,
-    private sidebarService: SiderbarService) {
+    private sidebarService: SiderbarService,
+    private header: HeaderService) {
+      this.header.headerData = { icon: 'people', title: 'Usuários' }
       this.sidebarService.sidebarData = { page: 'listar-usuarios'}
      }
 

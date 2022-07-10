@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment'
   providedIn: 'root'
 })
 export class LoginServiceService {
-  baseUrl = environment.baseUrl;
+  private baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) { }
 
   login(user: UserDTO): Observable<any>{

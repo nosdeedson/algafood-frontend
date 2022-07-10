@@ -86,7 +86,7 @@
           <ng-container matColumnDef="grupoPermissoesActions" >
             <th mat-header-cell *matHeaderCellDef>Desassociar/Permissão </th>
             <td mat-cell *matCellDef="let element" >
-              <a *ngIf="element.usuarios.length > 0" (click)="desassociarGrupoPermissao(element.id)" class=" ms-4" data-toggle="tooltip" data-placement="right" 
+              <a *ngIf="element.permissoes.length > 0" (click)="desassociarGrupoPermissao(element.id)" class=" ms-4" data-toggle="tooltip" data-placement="right" 
                 title="Desassociar Permissão do Grupo. Escolha permissão primeiro."> 
                 <mat-icon>broken_image</mat-icon>
               </a>
@@ -119,7 +119,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     
-        <mat-paginator [pageSizeOptions]="[2, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
         </mat-paginator>
       </div>
       

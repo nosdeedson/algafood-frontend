@@ -6,6 +6,7 @@ import { CidadeEndpointService } from 'src/app/backend/cidade-endpoint.service';
 import { EstadoEndpointService } from 'src/app/backend/estado-endpoint.service';
 import { CidadeDTO } from 'src/app/model/cidade/cidade-model';
 import Swal from 'sweetalert2';
+import { HeaderService } from '../template/header/header.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -58,11 +59,12 @@ export class CriarEditarCidadeComponent implements OnInit {
   constructor(
     private router: Router,
     private cidadeEndpoint: CidadeEndpointService,
-    private estadoEndpoint: EstadoEndpointService
-    ) {
+    private estadoEndpoint: EstadoEndpointService,
+    private headerService: HeaderService ) {
       if ( this.router.getCurrentNavigation().extras.state !== undefined){
         this.cidade = this.router.getCurrentNavigation().extras.state.cidade;
         this.edicao = true;
+        this.headerService.headerData = { icon: 'location_city', title: 'Criar/Editar cidade'}
       }
      }
 
@@ -146,20 +148,5 @@ export class CriarEditarCidadeComponent implements OnInit {
           })
         })
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

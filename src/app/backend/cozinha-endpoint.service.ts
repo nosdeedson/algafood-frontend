@@ -10,8 +10,8 @@ import { CozinhaDTO } from '../model/cozinha/cozinha-model';
 })
 export class CozinhaEndpointService {
 
-  baseUrl = environment.baseUrl + '/cozinhas'
-  options = environment.options
+  private baseUrl = environment.baseUrl + '/cozinhas'
+  private options = environment.options
 
   constructor(private http : HttpClient) { }
 

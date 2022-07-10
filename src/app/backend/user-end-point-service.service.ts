@@ -8,9 +8,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserEndPointService {
-  baseUrl = environment.baseUrl + '/usuarios';
-  urlRoot = environment.baseUrl;
-  options = environment.options
+  
+  private baseUrl = environment.baseUrl + '/usuarios';
+  private urlRoot = environment.baseUrl;
+  private options = environment.options
   constructor(private http: HttpClient) {
    }
 

@@ -8,8 +8,8 @@ import { PermissaoModel } from '../model/grupo/permissao-model';
   providedIn: 'root'
 })
 export class PermissaoEndpointService {
-  baseUrl = environment.baseUrl + '/permissoes';
-  options = environment.options;
+  private baseUrl = environment.baseUrl + '/permissoes';
+  private options = environment.options;
 
   constructor(private http: HttpClient) { }
 
@@ -19,6 +19,10 @@ export class PermissaoEndpointService {
 
   deletar(permissaoId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${permissaoId}`);
+  }
+
+  listar() : Observable<any> {
+    return this.http.get(`${this.baseUrl}`, this.options);
   }
 
   salvar(permissao: PermissaoModel): Observable<any> {

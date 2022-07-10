@@ -2,14 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { GrupoModel } from '../model/grupo/grupo-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GrupoPermissoesEndpointService {
 
-  baseUrl = environment.baseUrl + '/grupos'
-  options = environment.options
+  private baseUrl = environment.baseUrl + '/grupos'
+  private options = environment.options
 
   constructor(private http : HttpClient) { }
 

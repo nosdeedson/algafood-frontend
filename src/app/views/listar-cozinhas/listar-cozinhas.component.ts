@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { CozinhaEndpointService } from 'src/app/backend/cozinha-endpoint.service';
+import { HeaderService } from 'src/app/components/template/header/header.service';
 import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
 import { CozinhaDTO } from 'src/app/model/cozinha/cozinha-model';
 import Swal from 'sweetalert2';
@@ -27,10 +28,10 @@ export class ListarCozinhasComponent implements OnInit {
     private router: Router,
     private cozinhaEndpointService : CozinhaEndpointService,
     private changeDetectorRef: ChangeDetectorRef,
-    private sidebarService: SiderbarService) {
-      this.sidebarService.sidebarData = {
-        page: 'listar-cozinhas'
-      }
+    private sidebarService: SiderbarService,
+    private header: HeaderService) {
+      this.sidebarService.sidebarData = { page: 'listar-cozinhas' };
+      this.header.headerData = { icon: 'kitchen', title: 'Cozinhas'}
   }
 
   input: any = {

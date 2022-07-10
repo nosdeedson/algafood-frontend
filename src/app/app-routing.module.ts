@@ -18,10 +18,11 @@ import { HomeComponent } from './views/home/home.component';
 import { ListarCidadesComponent } from './views/listar-cidades/listar-cidades.component';
 import { ListarCozinhasComponent } from './views/listar-cozinhas/listar-cozinhas.component';
 import { ListarEstadosComponent } from './views/listar-estados/listar-estados.component';
+import { ListarProdutosComponent } from './views/listar-produtos/listar-produtos.component';
 import { ListarUsuariosComponent } from './views/listar-usuarios/listar-usuarios.component';
-import { MeuPerfilComponent } from './views/meu-perfil/meu-perfil.component';
-import { PedidosComponent } from './views/pedidos/pedidos.component';
-import { PermissoesComponent } from './views/permissoes/permissoes.component';
+import { ListarPedidosComponent } from './views/listar-pedidos/listar-pedidos.component';
+import { CriarEditarProdutoComponent } from './components/criar-editar-produto/criar-editar-produto.component';
+import { ListarPermissoesComponent } from './views/listar-permissoes/listar-permissoes.component';
 
 const routes: Routes = [
   {
@@ -55,16 +56,16 @@ const routes: Routes = [
         component: ListarUsuariosComponent
       },
       {
-        path: 'meu-perfil',
-        component: MeuPerfilComponent
+        path: 'listar-produtos',
+        component: ListarProdutosComponent
       },
       {
-        path: 'pedidos',
-        component: PedidosComponent
+        path: 'listar-pedidos',
+        component: ListarPedidosComponent
       },
       {
-        path: 'permissoes',
-        component: PermissoesComponent
+        path: 'listar-permissoes',
+        component: ListarPermissoesComponent
       },
       {
         path: 'criar-permissao',
@@ -121,6 +122,10 @@ const routes: Routes = [
       {
         path: 'editar-cozinha',
         component: CriarEditarCozinhaComponent
+      },
+      {
+        path: 'adicionar-produto',
+        component: CriarEditarProdutoComponent
       }
     ]
   }

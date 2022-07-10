@@ -6,10 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from '../home/home.component';
 import { TemplateModule } from 'src/app/components/template/template.module';
 import { ListarUsuariosComponent } from '../listar-usuarios/listar-usuarios.component';
-import { MeuPerfilComponent } from '../meu-perfil/meu-perfil.component';
-import { PedidosComponent } from '../pedidos/pedidos.component';
-import { PermissoesComponent } from '../permissoes/permissoes.component';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table'
+import {  MatTableModule} from '@angular/material/table'
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { CriarEditarUsuarioComponent } from 'src/app/components/criar-editar-usuario/criar-editar-usuario.component';
@@ -33,15 +30,18 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { PermissaoEditarComponent } from 'src/app/components/modais/permissao-editar/permissao-editar.component';
 import { CriarGrupoComponent } from 'src/app/components/criar-grupo/criar-grupo.component';
 import { CriarPermissaoComponent } from 'src/app/components/criar-permissao/criar-permissao.component';
+import { ListarProdutosComponent } from '../listar-produtos/listar-produtos.component';
+import { ListarPedidosComponent } from '../listar-pedidos/listar-pedidos.component';
+import { ListarPermissoesComponent } from '../listar-permissoes/listar-permissoes.component';
+import { CriarEditarProdutoComponent } from 'src/app/components/criar-editar-produto/criar-editar-produto.component';
 
 @NgModule({
   declarations: [
     DefaultComponent,
     HomeComponent,
     ListarUsuariosComponent,
-    MeuPerfilComponent,
-    PedidosComponent,
-    PermissoesComponent,
+    ListarPedidosComponent,
+    ListarPermissoesComponent,
     CriarEditarUsuarioComponent,
     ListarCidadesComponent,
     CriarEditarCidadeComponent,
@@ -54,6 +54,8 @@ import { CriarPermissaoComponent } from 'src/app/components/criar-permissao/cria
     PermissaoEditarComponent,
     CriarPermissaoComponent,
     CriarGrupoComponent,
+    ListarProdutosComponent,
+    CriarEditarProdutoComponent,
   ],
   imports: [
     CommonModule,
@@ -72,7 +74,7 @@ import { CriarPermissaoComponent } from 'src/app/components/criar-permissao/cria
     MatPaginatorModule,
     MatFormFieldModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

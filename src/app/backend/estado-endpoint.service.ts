@@ -9,8 +9,8 @@ import { EstadoDTO } from '../model/estado/estado-model';
 })
 export class EstadoEndpointService {
 
-  baseUrl = environment.baseUrl + '/estados';
-  options = environment.options
+  private baseUrl = environment.baseUrl + '/estados';
+  private options = environment.options
 
   constructor( private http: HttpClient) { }
 

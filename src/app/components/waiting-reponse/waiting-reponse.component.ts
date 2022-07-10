@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-waiting-reponse',
@@ -9,9 +10,14 @@ export class WaitingReponseComponent implements OnInit {
 
   @Input() waitingResponse: boolean
   @Input() temDados: boolean
-  constructor() { }
+  @Input() urlToGo: string
+
+  constructor( private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  adicionar(){
+    this.router.navigateByUrl(this.urlToGo)
+  }
 }

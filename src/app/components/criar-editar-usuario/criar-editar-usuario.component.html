@@ -69,6 +69,20 @@
                        error
                    </span>
                 </div>
+                <div class="col-12 mb-3" style="background-color: white;">
+                    <mat-form-field appearance="fill" *ngIf="!edicao" style="width: 100%;">
+                        <mat-label>Genero</mat-label>
+                        <mat-select  [errorStateMatcher]="matcher" [(value)]="user.genero"  >
+                          <mat-option>Selecione</mat-option>
+                          <mat-option *ngFor="let genero of generos" [value]="genero">{{genero}}</mat-option>
+                        </mat-select>
+                        <mat-hint>Dicas!</mat-hint>
+                        <!-- <mat-error *ngIf="selected.hasError('required')">Você deve selecionar um Estado</mat-error> -->
+                        <!-- <mat-error *ngIf="selected.hasError('pattern') && !selected.hasError('required')"> -->
+                          <!-- Selecione um Estado -->
+                        <!-- </mat-error> -->
+                      </mat-form-field>
+                </div>
             </form>
             
             <div class=" d-flex justify-content-end" *ngIf="!edicao">

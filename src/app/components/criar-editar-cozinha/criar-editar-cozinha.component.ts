@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { CozinhaEndpointService } from 'src/app/backend/cozinha-endpoint.service';
+import { SwalService } from 'src/app/helper/swal/swal.service';
 import { CozinhaDTO } from 'src/app/model/cozinha/cozinha-model';
 import Swal from 'sweetalert2';
+import { HeaderService } from '../template/header/header.service';
 
 @Component({
   selector: 'app-criar-editar-cozinha',
@@ -15,10 +17,13 @@ export class CriarEditarCozinhaComponent implements OnInit {
   editar: boolean = false;
 
   constructor(private route: Router,
-    private cozinhaEndpointService: CozinhaEndpointService) {
+    private cozinhaEndpointService: CozinhaEndpointService,
+    private headerService: HeaderService,
+    private swal: SwalService) {
       if(this.route.getCurrentNavigation().extras.state !== undefined){
         this.cozinha = this.route.getCurrentNavigation().extras.state.cozinha
         this.editar = true;
+        this.headerService.headerData = {icon: 'kitchen', title:'Criar/Editar cozinha'}
       }
      }
 
@@ -40,11 +45,11 @@ export class CriarEditarCozinhaComponent implements OnInit {
       this.cozinhaEndpointService.salvar(this.cozinha)
       .toPromise()
       .then(resp =>{
-        this.sucesso()
-        this.route.navigateByUrl('listar-cozinhas')
+        this.swal.sucesso(`Cozinha ${resp.nome} salva com sucesso`);
+        this.route.navigateByUrl('listar-cozinhas');
       })
       .catch(error =>{
-        this.erro(error)
+        this.swal.erroSalvarEditarObjeto(error)
       })
     }else{
       this.cozinhaAtualizar = {
@@ -53,29 +58,13 @@ export class CriarEditarCozinhaComponent implements OnInit {
       this.cozinhaEndpointService.editar(this.cozinhaAtualizar, this.cozinha.id)
         .toPromise()
         .then(() =>{
-          this.sucesso()
+          this.swal.sucesso(`Cozinha editarda com sucesso`);
           this.route.navigateByUrl('listar-cozinhas')
         })
         .catch(error =>{
-          this.erro(error)
+          this.swal.erroSalvarEditarObjeto(error)
         })
     }
   }
 
-  sucesso(){
-    Swal.fire({
-      title: 'Sucesso',
-      icon: 'success',
-      timer: 3000
-    })
-  }
-  
-  erro(error){
-    Swal.fire({
-      title: 'Erro',
-      icon: 'error',
-      timer: 3000,
-      text: error.error.detail
-    })
-  }
 }

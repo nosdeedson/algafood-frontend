@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { UserDTO } from 'src/app/model/user/user-model';
 import { HeaderData } from './headerData';
 
 @Injectable({
@@ -11,6 +12,8 @@ export class HeaderService {
     title : 'Início',
     icon: 'home'
   })
+
+  user: UserDTO = {}
 
   constructor() { }
 

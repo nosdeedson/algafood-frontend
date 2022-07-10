@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { EstadoEndpointService } from 'src/app/backend/estado-endpoint.service';
+import { HeaderService } from 'src/app/components/template/header/header.service';
 import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
 import { EstadoDTO } from 'src/app/model/estado/estado-model';
 import Swal from 'sweetalert2';
@@ -16,8 +17,10 @@ export class ListarEstadosComponent implements OnInit {
   constructor(
     private estadoEndpointService: EstadoEndpointService,
     private router: Router,
-    private sidebarService: SiderbarService) {
-      this.sidebarService.sidebarData = { page: 'listar-estados'}
+    private sidebarService: SiderbarService,
+    private header: HeaderService) {
+      this.sidebarService.sidebarData = { page: 'listar-estados'};
+      this.header.headerData = { icon: 'location_city', title: 'Estados'}
      }
 
   waitingResponse : boolean = true;

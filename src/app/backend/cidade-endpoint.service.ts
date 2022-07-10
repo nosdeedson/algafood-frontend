@@ -8,8 +8,8 @@ import { CidadeDTO } from '../model/cidade/cidade-model';
   providedIn: 'root'
 })
 export class CidadeEndpointService {
-  baseUrl = environment.baseUrl + '/cidades';
-  options = environment.options
+  private baseUrl = environment.baseUrl + '/cidades';
+  private options = environment.options
   constructor(private http: HttpClient) { }
 
   deletar(id: number) : Observable<any>{

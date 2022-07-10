@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -9,17 +9,18 @@ import { GrupoPermissoesEndpointService } from 'src/app/backend/grupo-permissoes
 import { PermissaoEndpointService } from 'src/app/backend/permissao-endpoint.service';
 import { UsuarioGrupoEndpointService } from 'src/app/backend/usuario-grupo-endpoint.service';
 import { PermissaoEditarComponent } from 'src/app/components/modais/permissao-editar/permissao-editar.component';
+import { HeaderService } from 'src/app/components/template/header/header.service';
 import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
 import { SwalService } from 'src/app/helper/swal/swal.service';
 import { GrupoModel } from 'src/app/model/grupo/grupo-model';
 import { PermissaoModel } from 'src/app/model/grupo/permissao-model';
 
 @Component({
-  selector: 'app-permissoes',
-  templateUrl: './permissoes.component.html',
-  styleUrls: ['./permissoes.component.css']
+  selector: 'app-listar-permissoes',
+  templateUrl: './listar-permissoes.component.html',
+  styleUrls: ['./listar-permissoes.component.css']
 })
-export class PermissoesComponent implements OnInit{
+export class ListarPermissoesComponent implements OnInit{
 
   // firstTable
   displayedColumns: string[] = ['id', 'grupo', 'usuarios', 'userGrupoActions', 'permissoes', 
@@ -42,9 +43,11 @@ export class PermissoesComponent implements OnInit{
     private permissaoEndpoint: PermissaoEndpointService,
     private swal: SwalService,
     private sidebarService: SiderbarService,
+    private header: HeaderService,
     private dialog: MatDialog) {
       this.sidebarService.sidebarData = { page : 'permissoes'}
       this.dataSource = new MatTableDataSource(this.grupos);
+      this.header.headerData = { icon: 'lock_open', title: 'Permissões'}
     }
 
   ngOnInit(): void {
@@ -56,7 +59,7 @@ export class PermissoesComponent implements OnInit{
         let usuarios = [];
         this.grupoPermissaoEndpontService.listarPermissoesPorGrupoId(grupo.id)
         .toPromise()
-        .then(resp => {
+        .then(resp => { 
           resp._embedded.permissoes.forEach((permissaoResp: { id: any; descricao: any; nome: any; }) => {
             let permissao = {
               id: permissaoResp.id,
