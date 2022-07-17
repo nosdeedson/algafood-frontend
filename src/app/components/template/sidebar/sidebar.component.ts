@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SiderbarService } from './siderbar.service';
 
@@ -10,11 +10,12 @@ import { SiderbarService } from './siderbar.service';
 export class SidebarComponent implements OnInit {
   pageSelecionada: string = ''
 
-  constructor(private router : Router,
-    private sidebarService : SiderbarService) {  }
+  constructor(private router: Router,
+    private sidebarService: SiderbarService) {
+  }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.pageSelecionada = this.sidebarService.sidebarData.page
-   }
+  }
 
 }

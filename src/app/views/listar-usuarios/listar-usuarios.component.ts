@@ -21,7 +21,7 @@ export class ListarUsuariosComponent implements OnInit {
   usuarios: any[];
   user: UserDTO;
   listaDeUsuarios : boolean = false;
-  waitingResonse : boolean = true;
+  waitingResponse : boolean = true;
   constructor( private userEndPoint: UserEndPointService ,
     private router: Router,
     private sidebarService: SiderbarService,
@@ -37,7 +37,7 @@ export class ListarUsuariosComponent implements OnInit {
       .then(resp =>{
         this.dataSource = resp._embedded.usuarios;
         this.listaDeUsuarios = true;
-        this.waitingResonse = false;
+        this.waitingResponse = false;
       })
       .catch(error =>{
         Swal.fire({

@@ -34,6 +34,12 @@ import { ListarProdutosComponent } from '../listar-produtos/listar-produtos.comp
 import { ListarPedidosComponent } from '../listar-pedidos/listar-pedidos.component';
 import { ListarPermissoesComponent } from '../listar-permissoes/listar-permissoes.component';
 import { CriarEditarProdutoComponent } from 'src/app/components/criar-editar-produto/criar-editar-produto.component';
+import { ListarRestaurantesComponent } from '../listar-restaurantes/listar-restaurantes.component';
+import { CriarEditarRestauranteComponent } from 'src/app/components/criar-editar-restaurante/criar-editar-restaurante.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MostraEnderecoComponent } from 'src/app/components/modais/mostra-endereco/mostra-endereco.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -56,6 +62,9 @@ import { CriarEditarProdutoComponent } from 'src/app/components/criar-editar-pro
     CriarGrupoComponent,
     ListarProdutosComponent,
     CriarEditarProdutoComponent,
+    ListarRestaurantesComponent,
+    CriarEditarRestauranteComponent,
+    MostraEnderecoComponent,
   ],
   imports: [
     CommonModule,
@@ -75,6 +84,9 @@ import { CriarEditarProdutoComponent } from 'src/app/components/criar-editar-pro
     MatFormFieldModule,
     MatSortModule,
     MatDialogModule,
+    MatStepperModule,
+    MatCheckboxModule,
+    MatMenuModule
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

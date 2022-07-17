@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { timer } from 'rxjs';
 import { CidadeEndpointService } from 'src/app/backend/cidade-endpoint.service';
 import { HeaderService } from 'src/app/components/template/header/header.service';
 import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
@@ -23,7 +22,7 @@ export class ListarCidadesComponent implements OnInit {
     private router: Router, 
     private header: HeaderService,
     private sidebarService: SiderbarService) {
-      this.sidebarService.sidebarData = { page: 'listar-cidades'};
+      this.sidebarService.sidebarData = { page : 'listar-cidades'}
       this.header.headerData = { icon: 'location_city', title: 'Cidades'}
     }
 

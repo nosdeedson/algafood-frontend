@@ -23,6 +23,8 @@ import { ListarUsuariosComponent } from './views/listar-usuarios/listar-usuarios
 import { ListarPedidosComponent } from './views/listar-pedidos/listar-pedidos.component';
 import { CriarEditarProdutoComponent } from './components/criar-editar-produto/criar-editar-produto.component';
 import { ListarPermissoesComponent } from './views/listar-permissoes/listar-permissoes.component';
+import { ListarRestaurantesComponent } from './views/listar-restaurantes/listar-restaurantes.component';
+import { CriarEditarRestauranteComponent } from './components/criar-editar-restaurante/criar-editar-restaurante.component';
 
 const routes: Routes = [
   {
@@ -48,24 +50,28 @@ const routes: Routes = [
     canActivate: [AuthenticationGuardGuard],
     children:[
       {
-        path: 'home',
-        component: HomeComponent
+        path: 'adicionar-cozinha',
+        component: CriarEditarCozinhaComponent
       },
       {
-        path: 'listar-usuarios',
-        component: ListarUsuariosComponent
+        path: 'adicionar-estado',
+        component: CriarEditarEstadoComponent
       },
       {
-        path: 'listar-produtos',
-        component: ListarProdutosComponent
+        path: 'adicionar-produto',
+        component: CriarEditarProdutoComponent
       },
       {
-        path: 'listar-pedidos',
-        component: ListarPedidosComponent
+        path: 'adicionar-restaurante',
+        component: CriarEditarRestauranteComponent
       },
       {
-        path: 'listar-permissoes',
-        component: ListarPermissoesComponent
+        path: 'adicionar-usuario',
+        component: CriarEditarUsuarioComponent
+      },
+      {
+        path: 'associar-usuario-perimissao-grupo',
+        component: AssociarUserPermitionGroupComponent
       },
       {
         path: 'criar-permissao',
@@ -76,57 +82,65 @@ const routes: Routes = [
         component: CriarGrupoComponent
       },
       {
-        path: 'associar-usuario-perimissao-grupo',
-        component: AssociarUserPermitionGroupComponent
-      },
-      {
-        path: 'enderecos',
-        component : EnderecosComponent
-      },
-      {
-        path: 'adicionar-usuario',
-        component: CriarEditarUsuarioComponent
-      },
-      {
-        path: 'editar-usuario',
-        component: CriarEditarUsuarioComponent
-      },
-      {
-        path: 'listar-cidades',
-        component: ListarCidadesComponent
+        path: 'criar-restaurante',
+        component: CriarEditarRestauranteComponent
       },
       {
         path: 'editar-cidade',
         component: CriarEditarCidadeComponent
       },
       {
-        path: 'listar-estados',
-        component: ListarEstadosComponent
-      },
-      {
-        path: 'adicionar-estado',
-        component: CriarEditarEstadoComponent
+        path: 'editar-cozinha',
+        component: CriarEditarCozinhaComponent
       },
       {
         path: 'editar-estado',
         component: CriarEditarEstadoComponent
       },
       {
+        path: 'editar-usuario',
+        component: CriarEditarUsuarioComponent
+      },
+      {
+        path: 'enderecos',
+        component : EnderecosComponent
+      },
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
+        path: 'listar-cidades',
+        component: ListarCidadesComponent
+      },
+      {
         path: 'listar-cozinhas',
         component: ListarCozinhasComponent
       },
       {
-        path: 'adicionar-cozinha',
-        component: CriarEditarCozinhaComponent
+        path: 'listar-estados',
+        component: ListarEstadosComponent
       },
       {
-        path: 'editar-cozinha',
-        component: CriarEditarCozinhaComponent
+        path: 'listar-pedidos',
+        component: ListarPedidosComponent
       },
       {
-        path: 'adicionar-produto',
-        component: CriarEditarProdutoComponent
-      }
+        path: 'listar-permissoes',
+        component: ListarPermissoesComponent
+      },
+      {
+        path: 'listar-produtos',
+        component: ListarProdutosComponent
+      },
+      {
+        path: 'listar-restaurantes',
+        component: ListarRestaurantesComponent
+      },
+      {
+        path: 'listar-usuarios',
+        component: ListarUsuariosComponent
+      },
     ]
   }
 ];

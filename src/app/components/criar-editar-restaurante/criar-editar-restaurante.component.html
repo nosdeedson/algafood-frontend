@@ -1,0 +1,118 @@
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 my-3">
+                <mat-stepper #stepper>
+                    <!-- restaurane -->
+                    <mat-step [stepControl]="formRestaurante" errorMessage="Preencha todos os campos.">
+                      <form [formGroup]="formRestaurante">
+                        <ng-template matStepLabel>Insera as informações do restaurante</ng-template>
+                        <div class="row mt-4">
+                            <div class="col-12 d-flex justify-content-evenly">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Nome</mat-label>
+                                    <input matInput placeholder="Nome" 
+                                    formControlName="nome" required>
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Taxa Frete</mat-label>
+                                    <input type="number" matInput placeholder="Taxa Frete" 
+                                    formControlName="taxaFrete" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 d-flex justify-content-evenly">
+                                <div class="checkbox-input rounded-pill px-5">
+                                    <mat-checkbox formControlName="ativo" class="m-1">Ativo</mat-checkbox>
+                                </div>
+                                <div class="checkbox-input rounded-pill px-5">
+                                    <mat-checkbox formControlName="aberto" class="m-1" >Aberto</mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-12 d-flex justify-content-end">
+                                <button class="btn btn-info me-3" mat-button matStepperNext>Próximo</button>
+                                <button class="btn btn-danger" mat-button (click)="stepper.reset()">Limpar</button>
+                            </div>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <!-- cozinha -->
+                    <mat-step [stepControl]="formCozinha" errorMessage="Cozinha obrigatória.">
+                      <form [formGroup]="formCozinha">
+                        <ng-template matStepLabel>Cozinha</ng-template>
+                        <div class="col-12 d-flex justify-content-center mt-5">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Escolha uma cozinha</mat-label>
+                                <mat-select formControlName="idCozinha"  required>
+                                  <mat-option>Escolha uma cozinha</mat-option>
+                                  <mat-option *ngFor="let cozinha of cozinhas" [value]="cozinha.id">
+                                    {{cozinha.nome}}
+                                  </mat-option>
+                                </mat-select>
+                                <!-- <mat-error *ngIf="formCozinha.hasError('required')">Escolha uma cozinha</mat-error> -->
+                            </mat-form-field>
+                        </div>
+                        <div class="row mt-5 ">
+                            <div class="col-12  d-flex justify-content-end">
+                                <button class="btn btn-warning me-3" mat-button matStepperPrevious>Voltar</button>
+                                <button class="btn btn-info me-3" mat-button matStepperNext>Próximo</button>
+                                <button class="btn btn-danger" mat-button (click)="stepper.reset()">Limpar</button>
+                            </div>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <!-- endereco -->
+                    <mat-step [stepControl]="formEndereco" errorMessage="Endereço obrigatório.">
+                        <form [formGroup]="formEndereco">
+                            <ng-template matStepLabel>Endereço</ng-template>
+                            <div class="row mt-4">
+                                <div class="col-12 d-flex justify-content-evenly">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Bairro</mat-label>
+                                        <input matInput placeholder="Centro" formControlName="bairro" required>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>CEP</mat-label>
+                                        <input matInput placeholder="37500-000" formControlName="cep" required>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Logradouro</mat-label>
+                                        <input matInput placeholder="Zequinha Luiz" formControlName="logradouro" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 d-flex justify-content-evenly">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Numero</mat-label>
+                                        <input matInput placeholder="180" formControlName="numero" required>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Complemento</mat-label>
+                                        <input matInput placeholder="Fundos" formControlName="complemento">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Escolha uma cidade</mat-label>
+                                        <mat-select formControlName="idCidade" required>
+                                          <mat-option>Escolha uma Cidade</mat-option>
+                                          <mat-option *ngFor="let cidade of cidades" [value]="cidade.id">
+                                            {{cidade.nome}}
+                                          </mat-option>
+                                        </mat-select>
+                                        <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error> -->
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button class="btn btn-warning me-3" mat-button matStepperPrevious>Voltar</button>
+                                    <button class="btn btn-success me-3" (click)="salvar()">Salvar</button>
+                                    <button class="btn btn-danger" mat-button (click)="stepper.reset()">Limpar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-step>
+                  </mat-stepper>
+            </div>
+        </div>
+    </div>
+</section>

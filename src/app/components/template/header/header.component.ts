@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {  Route, Router } from '@angular/router';
-import { User } from 'src/app/model/user/user';
+import { Router } from '@angular/router';
 import { UserDTO } from 'src/app/model/user/user-model';
 import { MeuPerfilComponent } from '../../modais/meu-perfil/meu-perfil.component';
 import { HeaderService } from './header.service';

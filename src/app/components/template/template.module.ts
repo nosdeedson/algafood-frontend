@@ -9,8 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MeuPerfilComponent } from '../modais/meu-perfil/meu-perfil.component';
 
-
-
 @NgModule({
   declarations: [
     HeaderComponent,

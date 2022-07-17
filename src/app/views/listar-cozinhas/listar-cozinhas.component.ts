@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { CozinhaEndpointService } from 'src/app/backend/cozinha-endpoint.service';
 import { HeaderService } from 'src/app/components/template/header/header.service';
 import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
+import { SwalService } from 'src/app/helper/swal/swal.service';
 import { CozinhaDTO } from 'src/app/model/cozinha/cozinha-model';
 import Swal from 'sweetalert2';
 
@@ -29,6 +30,7 @@ export class ListarCozinhasComponent implements OnInit {
     private cozinhaEndpointService : CozinhaEndpointService,
     private changeDetectorRef: ChangeDetectorRef,
     private sidebarService: SiderbarService,
+    private swal: SwalService,
     private header: HeaderService) {
       this.sidebarService.sidebarData = { page: 'listar-cozinhas' };
       this.header.headerData = { icon: 'kitchen', title: 'Cozinhas'}
@@ -62,18 +64,10 @@ export class ListarCozinhasComponent implements OnInit {
       })
       .catch(e =>{
         if (e.error.status === 401) {
-          Swal.fire({
-            title: 'Erro',
-            icon: 'error',
-            text: e.error.detail
-          })
+          this.swal.erroCarregarPagina(e)
           this.router.navigateByUrl('/')
         } else {
-          Swal.fire({
-            title: 'Erro',
-            icon: 'error',
-            text: e.error.detail
-          })
+          this.swal.erroCarregarPagina(e)
         }
       })
   }

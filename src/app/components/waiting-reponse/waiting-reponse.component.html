@@ -6,10 +6,10 @@
         </div>
         <div *ngIf="!temDados" class="col-6">
           <div class="m-4 d-flex justify-content-center">
-            <h1 class="h1">Sem Informação. <i class="material-icons">perm_device_information</i></h1>
+            <h1 class="h1">Sem Informação. <i class="material-icons">info</i></h1>
           </div>
         </div>
-        <div class="col-3" *ngIf="!waitingResponse">
+        <div class="col-3" *ngIf="waitingResponse">
           <div class="demo-button-container d-flex justify-content-end m-3">
             <button (click)="adicionar()"  mat-raised-button class="demo-button">
               Adicionar
