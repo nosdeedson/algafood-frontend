@@ -15,6 +15,14 @@ export class RestauranteEndpointService {
   constructor(private http: HttpClient,
     private router: Router) { }
 
+    atualizar(idRestaurante: number, restaurante: RestauranteModel): Observable<any> {
+      return this.http.put(`${this.baseUrl}/${idRestaurante}`, restaurante, this.options);
+    }
+
+    buscar(id: number): Observable<any> {
+      return this.http.get(`${this.baseUrl}/${id}`, this.options)
+    }
+
     listar(): Observable<any> {
       return this.http.get(`${this.baseUrl}`, this.options);
     }

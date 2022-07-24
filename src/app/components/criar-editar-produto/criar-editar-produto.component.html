@@ -1,1 +1,29 @@
-<section>criar-editar-produto works!</section>
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-evenly mt-3">
+                <div class="checkbox-input rounded-pill px-5">
+                    <mat-checkbox [(ngModel)]="produto.ativo"  class="m-1">Ativo</mat-checkbox>
+                </div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Nome</mat-label>
+                    <input [(ngModel)]="produto.nome" type="text" matInput placeholder="Nome" required>
+                </mat-form-field>
+            </div>
+            <div class="col-12 d-flex justify-content-evenly">
+                <mat-form-field appearance="fill">
+                    <mat-label>Descrição</mat-label>
+                    <input [(ngModel)]="produto.descricao" matInput placeholder="Descrição" required type="text">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Preço</mat-label>
+                    <input [(ngModel)]="produto.preco" matInput type="number" placeholder="Preço" required>
+                </mat-form-field>
+            </div>
+            <div class="col-10 d-flex justify-content-end">
+                <button class="btn btn-warning me-2" (click)="voltar()" >Voltar</button>
+                <button (click)="salvar()" mat-flat-button color="primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+</section>

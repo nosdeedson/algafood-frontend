@@ -6,7 +6,6 @@ import { HeaderService } from '../template/header/header.service';
 import { CozinhaDTO } from '../../model/cozinha/cozinha-model';
 import { CozinhaEndpointService } from 'src/app/backend/cozinha-endpoint.service';
 import { SwalService } from 'src/app/helper/swal/swal.service';
-import { CidadeEndpointService } from 'src/app/backend/cidade-endpoint.service';
 import { CidadeDTO } from 'src/app/model/cidade/cidade-model';
 import { RestauranteEndpointService } from 'src/app/backend/restaurante-endpoint.service';
 import { Router } from '@angular/router';
@@ -22,7 +21,6 @@ export class CriarEditarRestauranteComponent implements OnInit {
   constructor(private headerService: HeaderService,
     private _formBuilder: FormBuilder,
     private cozinhaEndpoint: CozinhaEndpointService,
-    private cidadeEndpoint: CidadeEndpointService,
     private restauranteEndpoind: RestauranteEndpointService,
     private router: Router,
     private swal: SwalService) {
@@ -70,20 +68,6 @@ export class CriarEditarRestauranteComponent implements OnInit {
       })
       .catch( erro => {
         this.swal.erroCarregarPagina(erro)
-      })
-    this.cidadeEndpoint.listar()
-      .toPromise()
-      .then( resp => {
-        resp.content.forEach(cidade => {
-          let city = {
-            id: cidade.id,
-            nome: cidade.nome
-          }
-          this.cidades.push(city)
-        })
-      })
-      .catch( erro => {
-        this.swal.erroCarregarPagina(erro);
       })
   }
 

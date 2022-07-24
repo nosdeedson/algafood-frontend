@@ -17,6 +17,11 @@ a {
     cursor: pointer;
 }
 
+.checkbox-input{
+    background-color: rgba(0, 0, 0, 0.04);
+    height: 35px;
+}
+
 /* .bg-azul1{
     background-color: #E8F1F2;
 }

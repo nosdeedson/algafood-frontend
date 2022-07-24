@@ -40,6 +40,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MostraEnderecoComponent } from 'src/app/components/modais/mostra-endereco/mostra-endereco.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { CriarEditarEnderecoComponent } from 'src/app/components/criar-editar-endereco/criar-editar-endereco.component';
+import { FormEnderecoComponent } from 'src/app/components/forms/form-endereco/form-endereco.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import {MatMenuModule} from '@angular/material/menu';
     ListarRestaurantesComponent,
     CriarEditarRestauranteComponent,
     MostraEnderecoComponent,
+    CriarEditarEnderecoComponent,
+    FormEnderecoComponent,
   ],
   imports: [
     CommonModule,

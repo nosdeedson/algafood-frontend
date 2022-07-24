@@ -45,7 +45,6 @@ export class HeaderComponent implements OnInit {
   }
 
   openDialog(): void {
-    alert('teste')
     const dialogRef = this.dialog.open(MeuPerfilComponent, {
       width: '250px',
       data: '',

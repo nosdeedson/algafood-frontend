@@ -1,0 +1,24 @@
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 my-3">
+                <mat-stepper #stepper>
+                    <!-- endereco -->
+                    <mat-step [stepControl]="formEndereco" errorMessage="Endereço obrigatório.">
+                        <form [formGroup]="formEndereco">
+                            <ng-template matStepLabel>Endereço</ng-template>
+                            <app-form-endereco [formEndereco]="formEndereco"></app-form-endereco>
+                            <div class="row mt-5">
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button class="btn btn-warning me-3" (click)="voltar()" mat-button matStepperPrevious>Voltar</button>
+                                    <button class="btn btn-success me-3" (click)="salvar()" >Salvar</button>
+                                    <button class="btn btn-danger" mat-button (click)="stepper.reset()">Limpar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-step>
+                  </mat-stepper>
+            </div>
+        </div>
+    </div>
+</section>

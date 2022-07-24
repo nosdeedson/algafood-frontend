@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { RestauranteEndpointService } from 'src/app/backend/restaurante-endpoint.service';
+import { CriarEditarEnderecoComponent } from 'src/app/components/criar-editar-endereco/criar-editar-endereco.component';
 import { MostraEnderecoComponent } from 'src/app/components/modais/mostra-endereco/mostra-endereco.component';
 import { HeaderService } from 'src/app/components/template/header/header.service';
 import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
@@ -56,15 +57,40 @@ export class ListarRestaurantesComponent implements OnInit {
             aberto: restaurante.aberto,
             endereco: restaurante.endereco,
             cozinha: restaurante.cozinha,
-            produtos: this.produtos, //this.adicionarProdutos(restaurante.id), corrigir
-            formasPagamento: this.formasPagamento //corrigir
+            produtos: this.produtos,
+            formasPagamento : this.formasPagamento            
           }
+          this.restauranteEndpoint.listarProdutos(restaurante.id)
+          .toPromise()
+          .then(produtos => {
+              this.produtos = [];
+              produtos._embedded.produtos.forEach(produto => {
+                let prod = { id: produto.id, nome: produto.nome }
+                this.produtos.push(prod);
+                rest.produtos = this.produtos
+              })
+            })
+            .catch(erro => {
+              this.swal.erroCarregarPagina(erro)
+          });
+          this.restauranteEndpoint.listarFormasPagamento(restaurante.id)
+          .toPromise()
+          .then(pagamentos => {
+            this.formasPagamento = [];
+            pagamentos._embedded.formasPagamento.forEach( pagamento => {
+              let pag = { id: pagamento.id, descricao: pagamento.descricao}
+              this.formasPagamento.push(pag)
+              rest.formasPagamento = this.formasPagamento
+            })
+          })
+          .catch(erro => {
+            this.swal.erroCarregarPagina(erro)
+          })
           this.restaurantes.push(rest);
         });
         this.dataSource = new MatTableDataSource(this.restaurantes);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(this.dataSource.data)
         this.temRestaurantes = true;
         this.waitingResponse= false;
       })
@@ -77,38 +103,12 @@ export class ListarRestaurantesComponent implements OnInit {
     this.router.navigateByUrl('/adicionar-restaurante')
   }
 
-  adicionarFormasPagamento(idRestaurante: number) : FormaPagamentoModel[] {
-    this.formasPagamento = null;
-    this.formasPagamento = []
-    this.restauranteEndpoint.listarFormasPagamento(idRestaurante)
-      .toPromise()
-      .then(pagamentos => {
-        pagamentos._embedded.formasPagamento.forEach( pagamento => {
-          let pag = { id: pagamento.id, descricao: pagamento.descricao}
-          this.formasPagamento.push(pag)
-        })
-        return this.formasPagamento
-      })
-      .catch(erro => {
-        this.swal.erroCarregarPagina(erro)
-      })
-    return [];
+  adicionarEndereco(id: number){
+    this.router.navigate(['/criar-endereco'], {state: {idRestaurante: id}});
   }
 
-  adicionarProdutos(idRestaurante: number): ProdutoModel[]{
-    this.produtos = [];
-    this.restauranteEndpoint.listarProdutos(idRestaurante)
-    .toPromise()
-    .then(produtos => {
-      produtos._embedded.produtos.forEach(produto => {
-        let prod = { id: produto.id, nome: produto.nome}
-        this.produtos.push(prod);
-      })
-    })
-    .catch(erro =>{
-      this.swal.erroCarregarPagina(erro)
-    })
-    return this.produtos
+  adicionarProduto(idRestaurante: number){
+    this.router.navigateByUrl('/criar-produto', {state: {'idRestaurante': idRestaurante}})
   }
 
   applyFilter(event: Event) {
@@ -132,3 +132,7 @@ export class ListarRestaurantesComponent implements OnInit {
   }
 
 }
+function extras(arg0: string, extras: any, arg2: { idRestaurante: number; }) {
+  throw new Error('Function not implemented.');
+}
+

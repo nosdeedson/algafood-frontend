@@ -1,0 +1,38 @@
+<section>
+    <div class="row mt-4" [formGroup]="formEndereco">
+        <div class="col-12 d-flex justify-content-evenly">
+            <mat-form-field class="mx-1" appearance="fill">
+                <mat-label>Bairro</mat-label>
+                <input matInput placeholder="Centro" formControlName="bairro" required>
+            </mat-form-field>
+            <mat-form-field class="mx-1" appearance="fill">
+                <mat-label>CEP</mat-label>
+                <input matInput placeholder="37500-000" formControlName="cep" required>
+            </mat-form-field>
+            <mat-form-field class="mx-1" appearance="fill">
+                <mat-label>Logradouro</mat-label>
+                <input matInput placeholder="Zequinha Luiz" formControlName="logradouro" required>
+            </mat-form-field>
+        </div>
+        <div class="col-12 d-flex justify-content-evenly">
+            <mat-form-field class="mx-1" appearance="fill">
+                <mat-label>Numero</mat-label>
+                <input matInput placeholder="180" formControlName="numero" required>
+            </mat-form-field>
+            <mat-form-field class="mx-1" appearance="fill">
+                <mat-label>Complemento</mat-label>
+                <input matInput placeholder="Fundos" formControlName="complemento">
+            </mat-form-field>
+            <mat-form-field class="mx-1" appearance="fill">
+                <mat-label>Escolha uma cidade</mat-label>
+                <mat-select formControlName="idCidade" required>
+                  <mat-option>Escolha uma Cidade</mat-option>
+                  <mat-option *ngFor="let cidade of cidades" [value]="cidade.id">
+                    {{cidade.nome}}
+                  </mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error> -->
+            </mat-form-field>
+        </div>
+    </div>
+</section>

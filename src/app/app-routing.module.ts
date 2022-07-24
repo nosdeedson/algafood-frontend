@@ -25,6 +25,7 @@ import { CriarEditarProdutoComponent } from './components/criar-editar-produto/c
 import { ListarPermissoesComponent } from './views/listar-permissoes/listar-permissoes.component';
 import { ListarRestaurantesComponent } from './views/listar-restaurantes/listar-restaurantes.component';
 import { CriarEditarRestauranteComponent } from './components/criar-editar-restaurante/criar-editar-restaurante.component';
+import { CriarEditarEnderecoComponent } from './components/criar-editar-endereco/criar-editar-endereco.component';
 
 const routes: Routes = [
   {
@@ -74,6 +75,10 @@ const routes: Routes = [
         component: AssociarUserPermitionGroupComponent
       },
       {
+        path: 'criar-endereco',
+        component: CriarEditarEnderecoComponent
+      },
+      {
         path: 'criar-permissao',
         component: CriarPermissaoComponent
       },
@@ -84,6 +89,10 @@ const routes: Routes = [
       {
         path: 'criar-restaurante',
         component: CriarEditarRestauranteComponent
+      },
+      {
+        path: 'criar-produto',
+        component: CriarEditarProdutoComponent
       },
       {
         path: 'editar-cidade',

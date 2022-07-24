@@ -15,14 +15,16 @@ export class SwalService {
         Swal.fire({
           title: 'Erro',
           icon: 'error',
-          text: erro.error.detail
+          text: erro.error.detail,
+          heightAuto: false,
         })
         this.router.navigateByUrl('/')
       } else {
         Swal.fire({
           title: 'Erro',
           icon: 'error',
-          text: erro.error.detail
+          text: erro.error.detail,
+          heightAuto: false,
         })
       }
     }
@@ -34,6 +36,7 @@ export class SwalService {
       text: msg,
       icon: 'info',
       allowOutsideClick: false,
+      heightAuto: false,
     })
     Swal.showLoading();
   }
@@ -43,7 +46,8 @@ export class SwalService {
       title: 'Erro',
       icon: 'error',
       text: erro.error.detail,
-      showCloseButton: true
+      showCloseButton: true,
+      heightAuto: false,
     })
   }
 
@@ -55,7 +59,17 @@ export class SwalService {
     Swal.fire({
       title: 'Selecionar',
       icon: 'info',
-      text: msg
+      text: msg,
+      heightAuto: false,
+    })
+  }
+
+  redirecionamento(msg: string){
+    Swal.fire({
+      title: 'Redirecionado',
+      icon: 'info',
+      text: msg,
+      heightAuto: false,
     })
   }
 
@@ -64,7 +78,8 @@ export class SwalService {
       title: 'Sucesso',
       icon: 'success',
       text: msg,
-      timer: 4000
+      timer: 4000,
+      heightAuto: false,
     })
   }
 
@@ -74,7 +89,8 @@ export class SwalService {
       icon: 'success',
       text: msg,
       timer: 4000,
-      showCloseButton: true
+      showCloseButton: true,
+      heightAuto: false,
     })
   }
 
