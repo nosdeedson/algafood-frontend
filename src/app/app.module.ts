@@ -11,6 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DefaultModule } from './views/default/default.module';
 import { RequestInterceptor } from './request.interceptor';
 import { FormEnderecoComponent } from './components/forms/form-endereco/form-endereco.component';
+import { AssociarPagamentoComponent } from './components/associar-pagamento/associar-pagamento.component';
 
 
 @NgModule({

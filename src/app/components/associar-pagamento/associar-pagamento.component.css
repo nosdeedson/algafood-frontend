@@ -1,0 +1,12 @@
+section{
+    background-color: rgba(78, 80, 80, 0.04);
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+    height: 95%;
+}
+
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+}

@@ -38,7 +38,7 @@
                       </form>
                     </mat-step>
                     <!-- cozinha -->
-                    <mat-step [stepControl]="formCozinha" errorMessage="Cozinha obrigatória.">
+                    <mat-step *ngIf="!editarRestaurante" [stepControl]="formCozinha" errorMessage="Cozinha obrigatória.">
                       <form [formGroup]="formCozinha">
                         <ng-template matStepLabel>Cozinha</ng-template>
                         <div class="col-12 d-flex justify-content-center mt-5">

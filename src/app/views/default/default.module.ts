@@ -42,6 +42,7 @@ import { MostraEnderecoComponent } from 'src/app/components/modais/mostra-endere
 import {MatMenuModule} from '@angular/material/menu';
 import { CriarEditarEnderecoComponent } from 'src/app/components/criar-editar-endereco/criar-editar-endereco.component';
 import { FormEnderecoComponent } from 'src/app/components/forms/form-endereco/form-endereco.component';
+import { AssociarPagamentoComponent } from 'src/app/components/associar-pagamento/associar-pagamento.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { FormEnderecoComponent } from 'src/app/components/forms/form-endereco/fo
     MostraEnderecoComponent,
     CriarEditarEnderecoComponent,
     FormEnderecoComponent,
+    AssociarPagamentoComponent,
   ],
   imports: [
     CommonModule,

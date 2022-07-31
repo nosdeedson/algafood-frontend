@@ -9,6 +9,7 @@ import { CriarEditarEnderecoComponent } from 'src/app/components/criar-editar-en
 import { MostraEnderecoComponent } from 'src/app/components/modais/mostra-endereco/mostra-endereco.component';
 import { HeaderService } from 'src/app/components/template/header/header.service';
 import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
+import { TirarIdService } from 'src/app/helper/change-interface/tirar-id.service';
 import { SwalService } from 'src/app/helper/swal/swal.service';
 import { FormaPagamentoModel } from 'src/app/model/forma-pagamento/forma-pagamento-model';
 import { ProdutoModel } from 'src/app/model/produto/produto-model';
@@ -34,18 +35,18 @@ export class ListarRestaurantesComponent implements OnInit {
   input: any = { value: ''};
   produtos: ProdutoModel[] = [];
   formasPagamento: FormaPagamentoModel[] = []
-
+  pagamentoSelecionadoId: number = 0;
   constructor(private sidebarService: SiderbarService,
     private restauranteEndpoint: RestauranteEndpointService,
     private swal: SwalService,
     private router: Router,
     private dialog: MatDialog,
     private headerService: HeaderService) {
-      this.sidebarService.sidebarData = { page : 'listar-restaurantes'}
-      this.headerService.headerData = {icon: 'restaurant', title: 'Restautantes'}
-    }
+    this.sidebarService.sidebarData = { page: 'listar-restaurantes' }
+    this.headerService.headerData = { icon: 'restaurant', title: 'Restautantes' }
+  }
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     this.waitingResponse = true;
     this.restauranteEndpoint.listar()
       .toPromise()
@@ -58,11 +59,11 @@ export class ListarRestaurantesComponent implements OnInit {
             endereco: restaurante.endereco,
             cozinha: restaurante.cozinha,
             produtos: this.produtos,
-            formasPagamento : this.formasPagamento            
+            formasPagamento: this.formasPagamento
           }
           this.restauranteEndpoint.listarProdutos(restaurante.id)
-          .toPromise()
-          .then(produtos => {
+            .toPromise()
+            .then(produtos => {
               this.produtos = [];
               produtos._embedded.produtos.forEach(produto => {
                 let prod = { id: produto.id, nome: produto.nome }
@@ -72,30 +73,45 @@ export class ListarRestaurantesComponent implements OnInit {
             })
             .catch(erro => {
               this.swal.erroCarregarPagina(erro)
-          });
+            });
           this.restauranteEndpoint.listarFormasPagamento(restaurante.id)
-          .toPromise()
-          .then(pagamentos => {
-            this.formasPagamento = [];
-            pagamentos._embedded.formasPagamento.forEach( pagamento => {
-              let pag = { id: pagamento.id, descricao: pagamento.descricao}
-              this.formasPagamento.push(pag)
-              rest.formasPagamento = this.formasPagamento
+            .toPromise()
+            .then(pagamentos => {
+              this.formasPagamento = [];
+              pagamentos._embedded.formasPagamento.forEach(pagamento => {
+                let pag = { id: pagamento.id, descricao: pagamento.descricao }
+                this.formasPagamento.push(pag)
+                rest.formasPagamento = this.formasPagamento
+              })
             })
-          })
-          .catch(erro => {
-            this.swal.erroCarregarPagina(erro)
-          })
+            .catch(erro => {
+              this.swal.erroCarregarPagina(erro)
+            })
           this.restaurantes.push(rest);
         });
         this.dataSource = new MatTableDataSource(this.restaurantes);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.temRestaurantes = true;
-        this.waitingResponse= false;
+        this.waitingResponse = false;
       })
-      .catch( erro => {
+      .catch(erro => {
         this.swal.erroCarregarPagina(erro);
+      })
+  }
+
+  abrir(restaurante: RestauranteModel){
+    this.swal.esperandoProcesso("Aguarde por favor");
+    this.restauranteEndpoint.abrir(restaurante.id)
+      .toPromise()
+      .then( () => {
+        this.swal.fecharSwalLoading()
+        this.swal.sucessoSemRetorno(`${restaurante.nome} aberto`)
+        window.location.reload()
+      })
+      .catch(erro => {
+        this.swal.fecharSwalLoading();
+        this.swal.erroSalvarEditarObjeto(erro)
       })
   }
 
@@ -120,6 +136,63 @@ export class ListarRestaurantesComponent implements OnInit {
     }
   }
 
+  associarPagamento(restaurante: RestauranteModel){
+    this.router.navigate(['associar-forma-pagamento'], { state: {restaurante}})
+  }
+
+  async deletar(restaurante: RestauranteModel){
+    if(  (await this.swal.confirmacao(restaurante.nome)).valueOf()){
+      this.swal.esperandoProcesso("Aguarde por favor.");
+      this.restauranteEndpoint.inativar(restaurante.id)
+        .toPromise()
+        .then( () => {
+          this.swal.fecharSwalLoading();
+          this.swal.confimarDelecao(`${restaurante.nome}`);
+          window.location.reload()
+        })
+        .catch( erro => {
+          this.swal.fecharSwalLoading()
+          this.swal.erroSalvarEditarObjeto(erro)
+        })
+    }
+  }
+
+  desassociarPagamento(restaurante: RestauranteModel){
+    this.swal.esperandoProcesso('Aguarde por favor.')
+    if(this.pagamentoSelecionadoId === 0){
+      this.swal.objetoNaoSelecionado('Selecione uma forma de pagamento');
+      return;
+    }
+    console.log(this.pagamentoSelecionadoId)
+    this.restauranteEndpoint.desassociarFormaPagamento(restaurante.id, this.pagamentoSelecionadoId)
+      .toPromise()
+      .then( () => {
+        this.swal.fecharSwalLoading()
+        this.swal.sucessoSemRetorno('Forma de pagamento desassociada.')
+        window.location.reload()
+      })
+      .catch(erro => this.swal.erroSalvarEditarObjeto(erro))
+  }
+
+  editar(restaurante: RestauranteModel){
+    this.router.navigate(['editar-restaurante'], {state: {restaurante: restaurante}})
+  }
+
+  fechar(restaurante: RestauranteModel){
+    this.swal.esperandoProcesso("Aguarde por favor");
+    this.restauranteEndpoint.fechar(restaurante.id)
+      .toPromise()
+      .then(() => {
+        this.swal.fecharSwalLoading();
+        this.swal.sucessoSemRetorno(`${restaurante.nome} fechado.`)
+        window.location.reload()
+      })
+      .catch( erro => {
+        this.swal.fecharSwalLoading();
+        this.swal.erroSalvarEditarObjeto(erro)
+      })
+  }
+
   openDialog(endereco: any): void {
     const dialogRef = this.dialog.open(MostraEnderecoComponent, {
       width: '250px',
@@ -131,8 +204,9 @@ export class ListarRestaurantesComponent implements OnInit {
     });
   }
 
+  selectPagamento(event: Event) {
+    this.pagamentoSelecionadoId = Number((event.target as HTMLSelectElement).value);
+  }
 }
-function extras(arg0: string, extras: any, arg2: { idRestaurante: number; }) {
-  throw new Error('Function not implemented.');
-}
+
 

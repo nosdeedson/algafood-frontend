@@ -9,6 +9,7 @@ import { SwalService } from 'src/app/helper/swal/swal.service';
 import { CidadeDTO } from 'src/app/model/cidade/cidade-model';
 import { RestauranteEndpointService } from 'src/app/backend/restaurante-endpoint.service';
 import { Router } from '@angular/router';
+import { TirarIdService } from 'src/app/helper/change-interface/tirar-id.service';
 
 @Component({
   selector: 'app-criar-editar-restaurante',
@@ -22,40 +23,31 @@ export class CriarEditarRestauranteComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private cozinhaEndpoint: CozinhaEndpointService,
     private restauranteEndpoind: RestauranteEndpointService,
+    private tirarIdRestaurante: TirarIdService,
     private router: Router,
     private swal: SwalService) {
-    this.headerService.headerData = { icon: 'restaurant', title: 'Restaurante' }
+      this.headerService.headerData = { icon: 'restaurant', title: 'Restaurante' }
+      if(this.router.getCurrentNavigation().extras.state !== undefined){
+        this.restaurante = this.router.getCurrentNavigation().extras?.state?.restaurante;
+        this.editarRestaurante = true
+      }
   }
 
   ativo: boolean = false
   aberto: boolean = false
   id: number = 0;
   restaurante: RestauranteModel = {};
+  editarRestaurante: boolean = false;
   cozinhas: CozinhaDTO[] = [];
   cidades: CidadeDTO[] = [];
-
-  formRestaurante = this._formBuilder.group({
-    nome: ['', Validators.required],
-    taxaFrete: ['', Validators.required],
-    ativo: [this.ativo],
-    aberto: [this.aberto]
-  });
-
-  formCozinha = this._formBuilder.group({
-    idCozinha: [this.id, Validators.required],
-  });
-
-  formEndereco = this._formBuilder.group({
-    bairro: ['', Validators.required],
-    cep: ['', Validators.required],
-    logradouro: ['', Validators.required],
-    numero: ['', Validators.required],
-    complemento: [''],
-    idCidade: [this.id, Validators.required],
-  });
+  formRestaurante: any;
+  formCozinha: any;
+  formEndereco: any;
 
   ngOnInit(): void {
-    this.cozinhaEndpoint.listar()
+    
+    if(!this.editarRestaurante){
+      this.cozinhaEndpoint.listar()
       .toPromise()
       .then(resp => {
         resp._embedded.cozinhas.forEach(cozinha => {
@@ -69,10 +61,37 @@ export class CriarEditarRestauranteComponent implements OnInit {
       .catch( erro => {
         this.swal.erroCarregarPagina(erro)
       })
+    } 
+      this.preencherForm();
+  }
+
+  preencherForm(){
+    this.formRestaurante = this._formBuilder.group({
+      nome: [this.restaurante.nome, Validators.required],
+      taxaFrete: [this.restaurante.taxaFrete, Validators.required],
+      ativo: [this.restaurante.ativo],
+      aberto: [this.restaurante.aberto]
+    });
+    this.formCozinha = this._formBuilder.group({
+      idCozinha: [this.restaurante?.cozinha?.id, Validators.required],
+    });
+  
+    this.formEndereco = this._formBuilder.group({
+      bairro: [this.restaurante?.endereco?.bairro, Validators.required],
+      cep: [this.restaurante?.endereco?.cep, Validators.required],
+      logradouro: [this.restaurante?.endereco?.logradouro, Validators.required],
+      numero: [this.restaurante?.endereco?.numero, Validators.required],
+      complemento: [this.restaurante?.endereco?.complemento],
+      idCidade: [this.restaurante?.endereco?.cidade?.id, Validators.required],
+    });
   }
 
   salvar() {
     this.swal.esperandoProcesso('Por favor aguarde');
+    let id = 0;
+    if( this.editarRestaurante){
+      id = this.restaurante.id
+    }
     this.restaurante = {
       nome : this.formRestaurante.get('nome').value,
       taxaFrete: this.formRestaurante.get('taxaFrete').value,
@@ -88,17 +107,32 @@ export class CriarEditarRestauranteComponent implements OnInit {
         cidade : { id : this.formEndereco.get('idCidade').value}
       }
     }
-    this.restauranteEndpoind.salvar(this.restaurante)
-      .toPromise()
-      .then( resp => {
-        this.swal.fecharSwalLoading();
-        this.swal.sucesso(`Restaurante ${resp.nome} salvo`)
-        this.router.navigateByUrl('/listar-restaurantes')
-      })
-      .catch( erro => {
-        this.swal.fecharSwalLoading();
-        this.swal.erroSalvarEditarObjeto(erro)
-      })
+    if ( this.editarRestaurante){
+      console.log(this.restaurante)
+      this.restaurante = this.tirarIdRestaurante.tirarIdRestaurante(this.restaurante);
+      this.restauranteEndpoind.atualizar(id, this.restaurante)
+        .toPromise()
+        .then( resp => {
+          this.swal.fecharSwalLoading();
+          this.swal.sucesso(`${resp.nome} atualizado.`);
+          this.router.navigateByUrl( 'listar-restaurantes');
+        })
+        .catch( erro => {
+          this.swal.fecharSwalLoading();
+          this.swal.erroSalvarEditarObjeto(erro)
+        })
+    } else{
+      this.restauranteEndpoind.salvar(this.restaurante)
+        .toPromise()
+        .then(resp => {
+          this.swal.fecharSwalLoading();
+          this.swal.sucesso(`Restaurante ${resp.nome} salvo`)
+          this.router.navigateByUrl('/listar-restaurantes')
+        })
+        .catch(erro => {
+          this.swal.fecharSwalLoading();
+          this.swal.erroSalvarEditarObjeto(erro)
+        })
+    }
   }
-
 }

@@ -7,7 +7,35 @@ import Swal from 'sweetalert2';
 })
 export class SwalService {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {  }
+
+  async confirmacao(msg: string): Promise<boolean>{
+    let deletar = false;
+    await Swal.fire({
+      title: `Deletar: ${msg}, você tem certeza?`,
+      icon: 'question',
+      text: 'Você não vai poder reverter isto.',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, deletar',
+      confirmButtonColor: '#3085d6',
+      allowOutsideClick: false,
+      heightAuto: false
+    }).then( result => {
+      deletar = result.isConfirmed.valueOf();
+    })
+    return deletar;
+  }
+
+  confimarDelecao(msg : string){
+    Swal.fire({
+      title: 'Deletado',
+      icon: 'success',
+      allowOutsideClick: false,
+      heightAuto: false,
+      text: `${msg} deletado.`,
+    })
+  }
 
   erroCarregarPagina(erro: any) {
     if (erro.error != null || erro.error != undefined) {
@@ -70,6 +98,7 @@ export class SwalService {
       icon: 'info',
       text: msg,
       heightAuto: false,
+      timer: 4000
     })
   }
 

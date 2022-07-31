@@ -26,6 +26,7 @@ import { ListarPermissoesComponent } from './views/listar-permissoes/listar-perm
 import { ListarRestaurantesComponent } from './views/listar-restaurantes/listar-restaurantes.component';
 import { CriarEditarRestauranteComponent } from './components/criar-editar-restaurante/criar-editar-restaurante.component';
 import { CriarEditarEnderecoComponent } from './components/criar-editar-endereco/criar-editar-endereco.component';
+import { AssociarPagamentoComponent } from './components/associar-pagamento/associar-pagamento.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,10 @@ const routes: Routes = [
         component: CriarEditarUsuarioComponent
       },
       {
+        path: 'associar-forma-pagamento',
+        component: AssociarPagamentoComponent
+      },
+      {
         path: 'associar-usuario-perimissao-grupo',
         component: AssociarUserPermitionGroupComponent
       },
@@ -105,6 +110,10 @@ const routes: Routes = [
       {
         path: 'editar-estado',
         component: CriarEditarEstadoComponent
+      },
+      {
+        path: 'editar-restaurante',
+        component: CriarEditarRestauranteComponent
       },
       {
         path: 'editar-usuario',

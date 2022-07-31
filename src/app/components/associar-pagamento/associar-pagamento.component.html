@@ -1,0 +1,30 @@
+<section>
+    <app-waiting-reponse [waitingResponse]="waitingResponse"
+    [temDados]="temFormasPagamento" [urlToGo]="'listar-restaurantes'"></app-waiting-reponse>
+    <div [hidden]="!temFormasPagamento" class="container-fluid">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center mt-3">
+                <h2 class="h2">Associar restaurante [ <span> {{restaurante.nome}} </span> ] a formas de pagameto</h2>
+            </div>
+            <div class="col-12 d-flex justify-content-center mt-3">
+                <mat-form-field appearance="fill">
+                    <mat-label>Formas Pagamento</mat-label>
+                    <mat-select [formControl]="formFormasPagamento" multiple>
+                      <mat-select-trigger>
+                        {{formFormasPagamento.value ? formFormasPagamento.value[0].descricao : ''}}
+                        <span *ngIf="formFormasPagamento.value?.length > 1" class="example-additional-selection">
+                          (+{{formFormasPagamento.value.length - 1}} {{formFormasPagamento.value?.length === 2 ? 'other' : 'others'}})
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option *ngFor="let formaPagamento of formasPagamento" [value]="formaPagamento">{{formaPagamento.descricao}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <div class="col-8 d-flex justify-content-end mt-3">
+                <button (click)="salvar()"  type="submit" class="btn btn-primary mb-3">Salvar</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
