@@ -50,8 +50,8 @@
             <ng-container matColumnDef="userGrupoActions">
                 <th mat-header-cell *matHeaderCellDef>Associar/Usuário </th>
                 <td mat-cell *matCellDef="let element">
-                    <a (click)="associarUsuario(element.id)" *ngIf="element.usuarios.length > 0" class=" ms-2" data-toggle="tooltip" data-placement="right"
-                        title="Associar Usuário do Grupo. Escolha usuário primeiro.">
+                    <a (click)="associarUsuario(element.id)" *ngIf="element.usuarios.length > 0" class=" ms-2"
+                       data-toggle="tooltip" data-placement="right" title="Associar Usuário do Grupo. Escolha usuário primeiro.">
                         <mat-icon>image</mat-icon>
                     </a>
 

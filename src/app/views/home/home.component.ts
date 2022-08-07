@@ -9,7 +9,7 @@ import { HeaderService } from 'src/app/components/template/header/header.service
 })
 export class HomeComponent implements OnInit {
 
-  links : string = '';
+  links : string[] = [];
 
   constructor(private headerService: HeaderService,
     private userEndPointService: UserEndPointService) {
@@ -23,7 +23,9 @@ export class HomeComponent implements OnInit {
     this.userEndPointService.getEndPoints()
       .toPromise()
       .then(resp =>{
-        this.links = JSON.stringify(resp)
+        Object.keys(resp._links).forEach(item =>{
+          this.links.push(resp._links[item].href)
+        })
       })
   }
 

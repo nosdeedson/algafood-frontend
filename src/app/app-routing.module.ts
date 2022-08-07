@@ -112,6 +112,10 @@ const routes: Routes = [
         component: CriarEditarEstadoComponent
       },
       {
+        path: 'editar-produto',
+        component: CriarEditarProdutoComponent
+      },
+      {
         path: 'editar-restaurante',
         component: CriarEditarRestauranteComponent
       },

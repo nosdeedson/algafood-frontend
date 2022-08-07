@@ -5,3 +5,7 @@ section {
     height: 95%;
     margin: 2%;
 }
+
+table {
+    width: 100%;
+}

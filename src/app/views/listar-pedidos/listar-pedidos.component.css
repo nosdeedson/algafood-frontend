@@ -5,3 +5,24 @@ section{
     background-color: rgba(80, 78, 78, 0.048);
     margin: 2%;
 }
+
+table{
+    width: 100%;
+}
+
+.edite {
+    color: yellowgreen;
+}
+
+.delete {
+    color: red;
+}
+
+.associar {
+    color: blue;
+}
+
+.desassociar{
+    color: brown;
+}
+

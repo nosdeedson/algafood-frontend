@@ -18,5 +18,16 @@ export class RestauranteProdutoEndpointService {
     return this.http.post(`${this.baseUrl}/${idRestaurante}/produtos`, produto, this.options)
   }
 
+  deletarProduto(idRestaurante: number, idProduto: number) : Observable<any>{
+    return this.http.delete(`${this.baseUrl}/${idRestaurante}/produtos/${idProduto}`, this.options)
+  }
+
+  editarProduto(idRestaurante: number, idProduto: number, produto: ProdutoDto) : Observable<any> {
+    return this.http.put(`${this.baseUrl}/${idRestaurante}/produtos/${idProduto}`, produto, this.options);
+  }
+
+  listarProdutos(idRestaurante: number) : Observable<any>{
+    return this.http.get(`${this.baseUrl}/${idRestaurante}/produtos`, this.options);
+  }
 
 }

@@ -1,4 +1,4 @@
-import {  Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SiderbarService } from './siderbar.service';
 
@@ -11,11 +11,13 @@ export class SidebarComponent implements OnInit {
   pageSelecionada: string = ''
 
   constructor(private router: Router,
+    private changeDetectorRef: ChangeDetectorRef,
     private sidebarService: SiderbarService) {
   }
 
   ngOnInit(): void {
     this.pageSelecionada = this.sidebarService.sidebarData.page
+    this.changeDetectorRef.detectChanges()
   }
 
 }

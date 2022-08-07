@@ -1,4 +1,13 @@
 <!-- todo o conteudo deve ficar dentro de section -->
 <section class="">
-    {{links}}
+    <div class="row">
+        <div class="col-12" style="text-align: center;">
+            <h1 class="h1">Links do serviço</h1>
+        </div>
+        <div *ngFor="let link of links; index as i;" class="col-12 " style="text-align: center;">
+            <h3 class="h3">
+                {{link}}
+            </h3>
+        </div>
+    </div>
 </section>

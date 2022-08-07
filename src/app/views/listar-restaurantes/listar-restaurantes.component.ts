@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { RestauranteEndpointService } from 'src/app/backend/restaurante-endpoint.service';
+import { RestauranteProdutoEndpointService } from 'src/app/backend/restaurante-produto-endpoint.service';
 import { CriarEditarEnderecoComponent } from 'src/app/components/criar-editar-endereco/criar-editar-endereco.component';
 import { MostraEnderecoComponent } from 'src/app/components/modais/mostra-endereco/mostra-endereco.component';
 import { HeaderService } from 'src/app/components/template/header/header.service';
@@ -25,7 +26,7 @@ export class ListarRestaurantesComponent implements OnInit {
   waitingResponse: boolean = false;
   temRestaurantes: boolean = false;
   displayedColumns: string[] = ['id', 'nome', 'cozinha', 'endereco', 'produtos', 
-      'pagamentos', 'Actions'];
+      'pagamentos', 'aberto', 'Actions'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -36,8 +37,11 @@ export class ListarRestaurantesComponent implements OnInit {
   produtos: ProdutoModel[] = [];
   formasPagamento: FormaPagamentoModel[] = []
   pagamentoSelecionadoId: number = 0;
+  produtoSelicinadoId: number = 0;
+
   constructor(private sidebarService: SiderbarService,
     private restauranteEndpoint: RestauranteEndpointService,
+    private restauranteProdutoEndpoint: RestauranteProdutoEndpointService,
     private swal: SwalService,
     private router: Router,
     private dialog: MatDialog,
@@ -157,13 +161,31 @@ export class ListarRestaurantesComponent implements OnInit {
     }
   }
 
+  deletarProduto(idRestaurante: number){
+    if(this.produtoSelicinadoId === 0){
+      this.swal.objetoNaoSelecionado('Selecione um produto a ser deletado.');
+      return;
+    }
+    this.swal.esperandoProcesso("Aguarde por favor");
+    this.restauranteProdutoEndpoint.deletarProduto(idRestaurante, this.produtoSelicinadoId)
+      .toPromise()
+      .then( () => {
+        this.swal.fecharSwalLoading();
+        this.swal.sucessoSemRetorno("Produto deletado.");
+        window.location.reload()
+      })
+      .catch( erro => {
+        this.swal.fecharSwalLoading();
+        this.swal.erroSalvarEditarObjeto(erro);
+      })
+  }
+
   desassociarPagamento(restaurante: RestauranteModel){
     this.swal.esperandoProcesso('Aguarde por favor.')
     if(this.pagamentoSelecionadoId === 0){
       this.swal.objetoNaoSelecionado('Selecione uma forma de pagamento');
       return;
     }
-    console.log(this.pagamentoSelecionadoId)
     this.restauranteEndpoint.desassociarFormaPagamento(restaurante.id, this.pagamentoSelecionadoId)
       .toPromise()
       .then( () => {
@@ -193,6 +215,10 @@ export class ListarRestaurantesComponent implements OnInit {
       })
   }
 
+  listarProdutos(restaurante: RestauranteModel){
+    this.router.navigate(['listar-produtos'], {state: {restaurante}})
+  }
+
   openDialog(endereco: any): void {
     const dialogRef = this.dialog.open(MostraEnderecoComponent, {
       width: '250px',
@@ -206,6 +232,10 @@ export class ListarRestaurantesComponent implements OnInit {
 
   selectPagamento(event: Event) {
     this.pagamentoSelecionadoId = Number((event.target as HTMLSelectElement).value);
+  }
+
+  selectProduto(event: Event) {
+    this.produtoSelicinadoId = Number( (event.target as HTMLSelectElement).value )
   }
 }
 

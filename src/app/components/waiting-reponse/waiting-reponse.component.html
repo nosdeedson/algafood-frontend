@@ -9,7 +9,7 @@
             <h1 class="h1">Sem Informação. <i class="material-icons">info</i></h1>
           </div>
         </div>
-        <div class="col-3" *ngIf="waitingResponse">
+        <div class="col-3" *ngIf="!temDados">
           <div class="demo-button-container d-flex justify-content-end m-3">
             <button (click)="adicionar()"  mat-raised-button class="demo-button">
               Adicionar

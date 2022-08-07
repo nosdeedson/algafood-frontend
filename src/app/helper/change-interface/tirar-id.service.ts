@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ProdutoDto } from 'src/app/model/produto/produto-dto';
+import { ProdutoModel } from 'src/app/model/produto/produto-model';
 import { RestauranteModel } from 'src/app/model/restaurante/restaurante-model';
 
 @Injectable({
@@ -22,5 +24,14 @@ export class TirarIdService {
       taxaFrete: restaurante.taxaFrete
     }
     return this.restauranteSemId;
+  }
+
+  public tirarIdProduto(produto: ProdutoDto) : ProdutoDto{
+    return {
+      ativo: produto.ativo,
+      descricao: produto.descricao,
+      nome: produto.nome,
+      preco: produto.preco
+    }
   }
 }
