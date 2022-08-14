@@ -79,6 +79,26 @@ export class SwalService {
     })
   }
 
+  errorLoginInvalido(erro: any){
+    Swal.fire({
+      title: 'Erro Login',
+      icon: 'error',
+      html: `<h3>${erro.error.error}. <br/>${erro.error.message}.<h3/>`,
+      showCloseButton: true,
+      heightAuto: false
+    })
+  }
+
+  erroLoginServidorDown(){
+    Swal.fire({
+      title: 'Informação',
+      icon: 'info',
+      text: 'Servidor fora do ar. Tente mais tarde.',
+      showCloseButton: true,
+      heightAuto: false
+    })
+  }
+
   fecharSwalLoading(){
     Swal.close();
   }

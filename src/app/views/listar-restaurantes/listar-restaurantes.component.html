@@ -54,12 +54,11 @@
               <td  mat-cell *matCellDef="let row">
                 <mat-form-field appearance="fill" class="mt-2" *ngIf="row.produtos.length > 0">
                   <mat-label>Produtos</mat-label>
-                  <select  matNativeControl (change)="selectProduto($event)">
-                    <option value="">Selecione</option>
-                    <option  class="my-5" *ngFor="let produto of row.produtos" [value]="produto.id"
+                  <mat-select  matNativeControl (change)="selectProduto($event)" multiple>
+                    <mat-option  class="mb-1" *ngFor="let produto of row.produtos" [value]="produto"
                           [selected]="selectProduto === produto.id"  >{{ produto.nome }}
-                    </option>
-                  </select>
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field>
 
                 <mat-label *ngIf="row.produtos.length === 0" style="margin-left: 10px;">
@@ -70,7 +69,7 @@
                   </i>
                 </mat-label>
               </td>
-          </ng-container>
+            </ng-container>
 
            <!-- pagamentos Column -->
            <ng-container matColumnDef="pagamentos">
@@ -111,6 +110,26 @@
                       title="Abrir restaurante">
                     <i ><mat-icon class="delete">lock</mat-icon> </i>
                   </a>
+                </mat-label>
+              </td>
+            </ng-container>
+
+            <!-- fazer pedido Column -->
+            <ng-container matColumnDef="fazerPedido">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Fazer Pedido </th>
+              <td mat-cell *matCellDef="let row"> 
+                <mat-label *ngIf="row.aberto" style="margin-left: 10px;">
+                  <a   data-toggle="tooltip" data-placement="right" 
+                      title="Fazer um pedido" >
+                     <i><mat-icon class="edite">restaurant_menu</mat-icon></i> 
+                  </a>
+                </mat-label>
+                <mat-label *ngIf="!row.aberto" style="margin-left: 10px;">
+                  <p  data-toggle="tooltip" data-placement="right" 
+                      title="Restaurante fechado">
+                    <!-- <i ><mat-icon class="delete">lock</mat-icon> </i> -->
+                    Fechado
+                  </p>
                 </mat-label>
               </td>
             </ng-container>

@@ -26,7 +26,7 @@ export class ListarRestaurantesComponent implements OnInit {
   waitingResponse: boolean = false;
   temRestaurantes: boolean = false;
   displayedColumns: string[] = ['id', 'nome', 'cozinha', 'endereco', 'produtos', 
-      'pagamentos', 'aberto', 'Actions'];
+      'pagamentos', 'aberto', 'fazerPedido', 'Actions'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

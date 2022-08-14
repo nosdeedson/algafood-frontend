@@ -5,7 +5,8 @@ import { HeaderService } from 'src/app/components/template/header/header.service
 import { SwalService } from 'src/app/helper/swal/swal.service';
 import { User } from 'src/app/model/user/user';
 import { UserDTO } from 'src/app/model/user/user-model';
-import Swal from 'sweetalert2';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -43,12 +44,17 @@ export class LoginComponent implements OnInit {
         this.usuario.token = resp.token;
         this.usuario.nome = resp.nome;
         this.usuario.genero = resp.genero;
+        this.usuario.id = resp.id;
         sessionStorage.setItem('user', JSON.stringify(this.usuario))
         this.usuario = JSON.parse(sessionStorage.getItem('user'))
         this.router.navigateByUrl('/home')
       })
       .catch(e => {
-        this.swal.erroSalvarEditarObjeto(e);
+        if ( e.status === 0 ){
+          this.swal.erroLoginServidorDown();
+        }else{
+          this.swal.errorLoginInvalido(e)
+        }
       })
   }
 
