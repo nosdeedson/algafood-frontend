@@ -12,5 +12,5 @@ export interface RestauranteModel {
     taxaFrete?: number,
     cozinha?: CozinhaId
     produtos?: ProdutoModel[],
-    formaPagamento?: FormaPagamentoModel[]
+    formasPagamento?: FormaPagamentoModel[]
 }

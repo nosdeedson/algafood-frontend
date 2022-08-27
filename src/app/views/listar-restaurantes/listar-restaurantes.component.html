@@ -41,9 +41,8 @@
                         <mat-icon>remove_red_eye</mat-icon>
                     </a>
                     <a (click)="adicionarEndereco(row.id)" style="text-decoration: none;" *ngIf="!row.endereco"  data-toggle="tooltip" 
-                      data-placement="right" title="Sem informação">
+                      data-placement="right" title="Sem informação. Adicionar">
                         <mat-icon>info</mat-icon>
-                        <span>Adicionar</span>
                     </a>
                 </td>
             </ng-container>
@@ -52,7 +51,7 @@
             <ng-container matColumnDef="produtos">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Produtos </th>
               <td  mat-cell *matCellDef="let row">
-                <mat-form-field appearance="fill" class="mt-2" *ngIf="row.produtos.length > 0">
+                <mat-form-field appearance="fill" *ngIf="row.produtos.length > 0">
                   <mat-label>Produtos</mat-label>
                   <mat-select  matNativeControl (change)="selectProduto($event)" multiple>
                     <mat-option  class="mb-1" *ngFor="let produto of row.produtos" [value]="produto"
@@ -74,7 +73,7 @@
            <!-- pagamentos Column -->
            <ng-container matColumnDef="pagamentos">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Formas Pagamentos </th>
-            <td  mat-cell *matCellDef="let row">
+            <td  mat-cell *matCellDef="let row" >
               <mat-form-field appearance="fill" class="mt-2" *ngIf="row.formasPagamento.length > 0">
                 <mat-label>Pagamentos</mat-label>
                 <select  matNativeControl (change)="selectPagamento($event)" >
@@ -117,18 +116,18 @@
             <!-- fazer pedido Column -->
             <ng-container matColumnDef="fazerPedido">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Fazer Pedido </th>
-              <td mat-cell *matCellDef="let row"> 
-                <mat-label *ngIf="row.aberto" style="margin-left: 10px;">
-                  <a   data-toggle="tooltip" data-placement="right" 
+              <td mat-cell *matCellDef="let row">
+                <mat-label *ngIf="row.aberto && row.formasPagamento.length > 0 && row.produtos.length > 0" style="margin-left: 10px;">
+                  <a (click)="fazerPedido(row)"  data-toggle="tooltip" data-placement="right" 
                       title="Fazer um pedido" >
                      <i><mat-icon class="edite">restaurant_menu</mat-icon></i> 
                   </a>
                 </mat-label>
-                <mat-label *ngIf="!row.aberto" style="margin-left: 10px;">
+                <mat-label style="margin-left: 10px;">
                   <p  data-toggle="tooltip" data-placement="right" 
                       title="Restaurante fechado">
-                    <!-- <i ><mat-icon class="delete">lock</mat-icon> </i> -->
-                    Fechado
+                    {{row.aberto === false ? 'Fechado': row.produtos.length === 0 ? 'Sem Produtos': 
+                      row.formasPagamento.length === 0 ? 'Sem formas pagamento': '' }}
                   </p>
                 </mat-label>
               </td>

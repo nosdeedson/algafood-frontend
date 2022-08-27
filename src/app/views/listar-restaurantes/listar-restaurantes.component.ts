@@ -215,6 +215,10 @@ export class ListarRestaurantesComponent implements OnInit {
       })
   }
 
+  fazerPedido(restaurante: RestauranteModel){
+    this.router.navigate(['fazer-pedido'], {state: { restaurante: restaurante}})
+  }
+
   listarProdutos(restaurante: RestauranteModel){
     this.router.navigate(['listar-produtos'], {state: {restaurante}})
   }

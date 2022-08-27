@@ -1,4 +1,5 @@
 export interface ProdutoModel {
     id?: number,
-    nome?: string
+    nome?: string,
+    quantidade?: number
 }

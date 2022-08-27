@@ -43,6 +43,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { CriarEditarEnderecoComponent } from 'src/app/components/criar-editar-endereco/criar-editar-endereco.component';
 import { FormEnderecoComponent } from 'src/app/components/forms/form-endereco/form-endereco.component';
 import { AssociarPagamentoComponent } from 'src/app/components/associar-pagamento/associar-pagamento.component';
+import { FazerPedidoComponent } from 'src/app/components/fazer-pedido/fazer-pedido/fazer-pedido.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { AssociarPagamentoComponent } from 'src/app/components/associar-pagament
     CriarEditarEnderecoComponent,
     FormEnderecoComponent,
     AssociarPagamentoComponent,
+    FazerPedidoComponent,
   ],
   imports: [
     CommonModule,

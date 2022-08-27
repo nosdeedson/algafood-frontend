@@ -18,7 +18,7 @@ export class TirarIdService {
       ativo: restaurante.ativo,
       cozinha: restaurante.cozinha,
       endereco: restaurante.endereco,
-      formaPagamento: restaurante.formaPagamento,
+      formasPagamento: restaurante.formasPagamento,
       nome: restaurante.nome,
       produtos: restaurante.produtos,
       taxaFrete: restaurante.taxaFrete

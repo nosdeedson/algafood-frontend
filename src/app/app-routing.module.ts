@@ -27,6 +27,7 @@ import { ListarRestaurantesComponent } from './views/listar-restaurantes/listar-
 import { CriarEditarRestauranteComponent } from './components/criar-editar-restaurante/criar-editar-restaurante.component';
 import { CriarEditarEnderecoComponent } from './components/criar-editar-endereco/criar-editar-endereco.component';
 import { AssociarPagamentoComponent } from './components/associar-pagamento/associar-pagamento.component';
+import { FazerPedidoComponent } from './components/fazer-pedido/fazer-pedido/fazer-pedido.component';
 
 const routes: Routes = [
   {
@@ -126,6 +127,10 @@ const routes: Routes = [
       {
         path: 'enderecos',
         component : EnderecosComponent
+      },
+      {
+        path: 'fazer-pedido',
+        component: FazerPedidoComponent
       },
       {
         path: 'home',
