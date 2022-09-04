@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalService } from 'src/app/helper/swal/swal.service';
 import { ItensPedido } from 'src/app/model/itensPedido/itens-pedido';
@@ -21,12 +21,10 @@ export class FazerPedidoComponent implements OnInit {
   public restaurante: RestauranteModel = {};
   formEndereco: any;
   formFormaPagamento: any;
-  formItensArray: any;
-  formItens: any;
+  itensFormGroup : FormGroup;
+  itensFormArray: FormArray;
   usuario: User = {};
   idFormaPagamento: number = 0;
-  produtos: ProdutoDto[] = [];
-  produtosSelecionados: ProdutoDto[] = [];
   pedido: PedidoFazer = {enderecoEntrega :{}, formaPagamento: {}, itens: [], 
       restaurante: { id: 0 }, usuarioId : this.usuario.id  };
   item: ItensPedido = {}
@@ -42,25 +40,26 @@ export class FazerPedidoComponent implements OnInit {
       this.router.navigateByUrl('listar-restaurantes')
     } else {
       this.restaurante = this.router.getCurrentNavigation().extras?.state?.restaurante;
-      this.produtos = this.restaurante.produtos
     }
   }
   
   ngOnInit(): void {
+    this.itensFormGroup = new FormGroup({
+      itensFormArray : new FormArray([])
+    })
     this.usuario = this.headerService.user
     this.preencherForm();
-    console.log(this.produtos)
   }
 
-  adicionarProduto(prod){
-    this.formItensArray.value.forEach(element => {
-      if( element.produtoId === prod.id){
-        element.quantidade = this.formItens.value.quantidade
-      }
+  createItem(produto: any) : FormGroup{
+    return this._formBuilder.group({
+      nome: [{value: produto.nome, disabled: true}],
+      produtoId: [produto.id, Validators.required],
+      quantidade: [0, Validators.required],
+      observacao: ['']
     })
-    console.log(this.formItensArray)
   }
-
+  
   preencherForm(){
     this.formEndereco = this._formBuilder.group({
       bairro: [ '', Validators.required],
@@ -74,17 +73,26 @@ export class FazerPedidoComponent implements OnInit {
     this.formFormaPagamento = this._formBuilder.group({
       idFormaPagamento: [this.idFormaPagamento, Validators.required],
     })
-    this.formItensArray = this._formBuilder.array([])
+
     this.restaurante.produtos.forEach(produto =>{
-      this.formItens = {};
-      this.formItens = this._formBuilder.group({
-        produtoId: [produto.id, Validators.required],
-        quantidade: [produto?.quantidade ? produto.quantidade : 0, Validators.required]
-      })
-      this.formItensArray.push(this.formItens)
+      this.itensFormArray = this.itensFormGroup.get('itensFormArray') as FormArray
+      this.itensFormArray.push(this.createItem(produto))
     })
-    console.log(this.formItensArray)
-    console.log(this.formItens)
+  }
+
+  addItem(item: any, index: number){
+    this.item = {
+      observacao: item.value.observacao,
+      produtoId: item.value.produtoId,
+      quantidade: item.value.quantidade
+    }
+    this.pedido.itens.push(this.item)
+  }
+  
+  enviar(){
+    console.log(this.formEndereco)
+    console.log(this.formFormaPagamento)
+    console.log(this.pedido)
   }
 
 }
