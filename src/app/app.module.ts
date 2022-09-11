@@ -13,6 +13,7 @@ import { RequestInterceptor } from './request.interceptor';
 import { FormEnderecoComponent } from './components/forms/form-endereco/form-endereco.component';
 import { AssociarPagamentoComponent } from './components/associar-pagamento/associar-pagamento.component';
 import { FazerPedidoComponent } from './components/fazer-pedido/fazer-pedido/fazer-pedido.component';
+import { ExibirFormaPagamentoPedidoComponent } from './components/exibir-forma-pagamento-pedido/exibir-forma-pagamento-pedido.component';
 
 
 @NgModule({

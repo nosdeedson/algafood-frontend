@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { PedidoFazer } from '../model/pedido/pedido-fazer';
 import { PedidoFilter } from '../model/pedido/pedido-filter';
 
 @Injectable({
@@ -14,13 +15,27 @@ export class PedidoEndpointService {
 
   constructor( private http: HttpClient) { }
 
+  buscarFormaPagamento(codigo: string): Observable<any>{
+    return this.http.get(`${this.baseUrl}/forma-pagamento/${codigo}`, this.options);
+  }
+
+  cancelar(codigo: string): Observable<any>{
+    return this.http.delete(`${this.baseUrl}/${codigo}/cancela`)
+  }
+
+  confirmar(codigo: string): Observable<any>{
+    return this.http.put(`${this.baseUrl}/${codigo}/confirmacao`, this.options);
+  }
+
+  entregar(codigo: string): Observable<any>{
+    return this.http.put(`${this.baseUrl}/${codigo}/entrega`, this.options)
+  }
+
   listar(filter: PedidoFilter): Observable<any>{
-    // let queryParams = new HttpParams()
-    //     .append("clienteId", filter?.clienteId)
-    //     .append("restauranteId", filter?.restauranteId)
-    //     .append("dataCriacaoInicio", String(filter?.dataCriacaoInicio))
-    //     .append("dataCriacaoFim", String(filter?.dataCriacaoFim));
-    // this.options.params = queryParams
     return this.http.get(`${this.baseUrl}`, this.options);
+  }
+
+  salvar(pedido: PedidoFazer): Observable<any>{
+    return this.http.post(`${this.baseUrl}`, pedido, this.options);
   }
 }

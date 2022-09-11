@@ -1,12 +1,12 @@
 section{
+    background-color: rgba(78, 80, 80, 0.04);
     display: flex;
     flex-direction: column;
-    height: 100%;
-    background-color: rgba(80, 78, 78, 0.048);
+    height: 95%;
     margin: 2%;
 }
 
-table{
+table {
     width: 100%;
 }
 

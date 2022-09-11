@@ -1,11 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { PedidoEndpointService } from 'src/app/backend/pedido-endpoint.service';
+import { ExibirFormaPagamentoPedidoComponent } from 'src/app/components/exibir-forma-pagamento-pedido/exibir-forma-pagamento-pedido.component';
 import { HeaderService } from 'src/app/components/template/header/header.service';
 import { SiderbarService } from 'src/app/components/template/sidebar/siderbar.service';
 import { SwalService } from 'src/app/helper/swal/swal.service';
+import { FormaPagamentoModel } from 'src/app/model/forma-pagamento/forma-pagamento-model';
 import { PedidoDTO } from 'src/app/model/pedido/pedido-dto';
 import { PedidoFilter } from 'src/app/model/pedido/pedido-filter';
 
@@ -28,7 +32,10 @@ export class ListarPedidosComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<PedidoDTO>;
 
-  constructor(
+  formaPagamento: FormaPagamentoModel;
+
+  constructor( 
+    private dialog: MatDialog,
     private pedidoEndpoint: PedidoEndpointService,
     private swal: SwalService,
     private sidebarService: SiderbarService,
@@ -42,7 +49,6 @@ export class ListarPedidosComponent implements OnInit {
     this.pedidoEndpoint.listar(this.pedidoFilter)
       .toPromise()
       .then( resp =>{
-        console.log(resp._embedded.pedidos)
         resp._embedded.pedidos.forEach(element => {
           this.pedido = {}
           this.pedido = {
@@ -78,4 +84,62 @@ export class ListarPedidosComponent implements OnInit {
     }
   }
 
+  cancelar(pedido: PedidoDTO){
+    this.swal.esperandoProcesso('Aguarde por favor.');
+    this.pedidoEndpoint.cancelar(pedido.codigo)
+        .toPromise()
+        .then(() => {
+          this.swal.fecharSwalLoading();
+          this.swal.sucessoSemRetorno(`Pedido de código ${pedido.codigo} foi cancelado.`)
+          window.location.reload()
+        })
+        .catch(erro =>{
+          this.swal.fecharSwalLoading();
+          this.swal.erroSalvarEditarObjeto(erro);
+        })
+  }
+
+  confirmar(pedido: PedidoDTO){
+    this.swal.esperandoProcesso("Aguarde por favor.")
+    this.pedidoEndpoint.confirmar(pedido.codigo)
+      .toPromise()
+      .then(response => {
+        this.swal.fecharSwalLoading()
+        this.swal.sucessoSemRetorno(`Pedido de código: ${pedido.codigo} confirmado.` )
+        window.location.reload();
+      })
+      .catch(erro =>{
+        this.swal.erroSalvarEditarObjeto(erro)
+      })
+  }
+
+  entregar(pedido: PedidoDTO){
+    this.swal.esperandoProcesso('Aguarde por favor.');
+    this.pedidoEndpoint.entregar(pedido.codigo)
+        .toPromise()
+        .then( () =>{
+          this.swal.fecharSwalLoading();
+          this.swal.sucessoSemRetorno(`Pedido de código ${pedido.codigo} alterado para entregue.`);
+          window.location.reload();
+        })
+        .catch(erro => {
+          this.swal.fecharSwalLoading();
+          this.swal.erroSalvarEditarObjeto(erro)
+        })
+  }
+
+  async mostrarFormaPagamento(pedido: PedidoDTO){
+    await this.pedidoEndpoint.buscarFormaPagamento(pedido.codigo)
+        .toPromise()
+        .then(resp =>{
+          this.formaPagamento = {
+            descricao: resp.descricao,
+            id: resp.id
+          }
+        })
+    const fp = this.dialog.open(ExibirFormaPagamentoPedidoComponent,{
+      width: '300px',
+      data: this.formaPagamento
+    })
+  }
 }

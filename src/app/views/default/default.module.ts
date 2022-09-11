@@ -44,6 +44,7 @@ import { CriarEditarEnderecoComponent } from 'src/app/components/criar-editar-en
 import { FormEnderecoComponent } from 'src/app/components/forms/form-endereco/form-endereco.component';
 import { AssociarPagamentoComponent } from 'src/app/components/associar-pagamento/associar-pagamento.component';
 import { FazerPedidoComponent } from 'src/app/components/fazer-pedido/fazer-pedido/fazer-pedido.component';
+import { ExibirFormaPagamentoPedidoComponent } from 'src/app/components/exibir-forma-pagamento-pedido/exibir-forma-pagamento-pedido.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { FazerPedidoComponent } from 'src/app/components/fazer-pedido/fazer-pedi
     FormEnderecoComponent,
     AssociarPagamentoComponent,
     FazerPedidoComponent,
+    ExibirFormaPagamentoPedidoComponent,
   ],
   imports: [
     CommonModule,

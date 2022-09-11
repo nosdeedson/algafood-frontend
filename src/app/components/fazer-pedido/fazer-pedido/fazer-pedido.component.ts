@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PedidoEndpointService } from 'src/app/backend/pedido-endpoint.service';
 import { SwalService } from 'src/app/helper/swal/swal.service';
 import { ItensPedido } from 'src/app/model/itensPedido/itens-pedido';
 import { PedidoFazer } from 'src/app/model/pedido/pedido-fazer';
@@ -28,12 +29,14 @@ export class FazerPedidoComponent implements OnInit {
   pedido: PedidoFazer = {enderecoEntrega :{}, formaPagamento: {}, itens: [], 
       restaurante: { id: 0 }, usuarioId : this.usuario.id  };
   item: ItensPedido = {}
+  itensPedido: ItensPedido[] = [];
 
   displayedColumns: string[] = ['nome', 'quantidade', 'adicionar'];
 
   constructor(private swal: SwalService,
     private _formBuilder: FormBuilder,
     private headerService: HeaderService,
+    private pedidoEndpoint: PedidoEndpointService,
     private router: Router) {
     headerService.headerData = { title: 'Fazer Pedido', icon: 'restaurant_menu' }
     if (this.router.getCurrentNavigation().extras?.state?.restaurante === undefined) {
@@ -86,13 +89,40 @@ export class FazerPedidoComponent implements OnInit {
       produtoId: item.value.produtoId,
       quantidade: item.value.quantidade
     }
-    this.pedido.itens.push(this.item)
+    this.itensPedido.push(this.item);
   }
   
   enviar(){
-    console.log(this.formEndereco)
-    console.log(this.formFormaPagamento)
+    this.swal.esperandoProcesso('Aguarde por favor');
+    this.pedido = {
+      enderecoEntrega : {
+        bairro : this.formEndereco.get('bairro').value,
+        cep : this.formEndereco.get('cep').value,
+        cidade : {
+          id: this.formEndereco.get('idCidade').value 
+        },
+        complemento : this.formEndereco.get('complemento').value,
+        logradouro : this.formEndereco.get('logradouro').value,
+        numero : this.formEndereco.get('numero').value,
+      },
+      itens : this.itensPedido,
+      formaPagamento: {
+        id: this.formFormaPagamento.get('idFormaPagamento').value
+      },
+      restaurante: {
+        id: this.restaurante.id
+      },
+      usuarioId: this.headerService.user.id
+    }
     console.log(this.pedido)
+    this.pedidoEndpoint.salvar(this.pedido)
+      .toPromise()
+      .then( response =>{
+        this.swal.fecharSwalLoading();
+        this.swal.sucesso(`O código do seu pedido é: ${response.codigo}`)
+        this.router.navigateByUrl('listar-pedidos')
+      })
+      .catch(erro => { this.swal.erroSalvarEditarObjeto(erro)})
   }
 
 }
